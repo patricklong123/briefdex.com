@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Briefdex — Markets before your first coffee</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green-900: #0d1f15;
+    --green-800: #1a3a28;
+    --green-700: #1e4a2f;
+    --green-600: #2d6a42;
+    --green-500: #3d8a55;
+    --green-100: #d4e8d8;
+    --green-50: #eaf3ec;
+    --gold-500: #c9a84c;
+    --gold-400: #d4b86a;
+    --gold-300: #e0cc99;
+    --gold-100: #f5edd8;
+    --cream: #faf7f2;
+    --white: #ffffff;
+    --text-dark: #0d1f15;
+    --text-mid: #3a5a45;
+    --text-light: #6b8a72;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 4rem;
+    background: rgba(13, 31, 21, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--gold-400);
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+
+  .nav-logo span {
+    color: var(--white);
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold-400); }
+
+  .nav-cta {
+    background: var(--gold-500) !important;
+    color: var(--green-900) !important;
+    padding: 0.5rem 1.25rem;
+    border-radius: 4px;
+    font-weight: 500 !important;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--gold-400) !important; }
+
+  /* HERO */
+  #home {
+    min-height: 100vh;
+    background: var(--green-900);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 4rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #home::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  #home::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; left: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(61,138,85,0.1) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-400);
+    margin-bottom: 2rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--gold-500);
+  }
+
+  .hero-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    color: var(--white);
+    max-width: 14ch;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-headline .gold { color: var(--gold-400); }
+
+  .hero-sub {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.6);
+    max-width: 42ch;
+    margin-bottom: 3rem;
+    font-weight: 300;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--gold-500);
+    color: var(--green-900);
+    padding: 0.875rem 2rem;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 0.9375rem;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .btn-primary:hover { background: var(--gold-400); transform: translateY(-1px); }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    color: rgba(255,255,255,0.7);
+    padding: 0.875rem 2rem;
+    border-radius: 4px;
+    font-weight: 400;
+    font-size: 0.9375rem;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.2);
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .btn-ghost:hover { border-color: var(--gold-400); color: var(--gold-400); }
+
+  .hero-ticker {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: rgba(201,168,76,0.08);
+    border-top: 1px solid rgba(201,168,76,0.15);
+    padding: 0.75rem 0;
+    overflow: hidden;
+  }
+
+  .ticker-inner {
+    display: flex;
+    gap: 3rem;
+    animation: ticker 30s linear infinite;
+    white-space: nowrap;
+  }
+
+  .ticker-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.03em;
+  }
+
+  .ticker-item .label { color: var(--gold-400); font-weight: 500; }
+  .ticker-item .up { color: #4ade80; }
+  .ticker-item .down { color: #f87171; }
+
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* SOCIAL PROOF BAR */
+  .proof-bar {
+    background: var(--green-800);
+    padding: 1rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+    flex-wrap: wrap;
+  }
+
+  .proof-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.02em;
+  }
+
+  .proof-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold-500);
+    flex-shrink: 0;
+  }
+
+  /* SECTIONS */
+  section { scroll-margin-top: 72px; }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold-500);
+    margin-bottom: 1rem;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 20px; height: 1px;
+    background: var(--gold-500);
+  }
+
+  /* HOW IT WORKS */
+  #how-it-works {
+    padding: 7rem 4rem;
+    background: var(--cream);
+  }
+
+  .section-header {
+    max-width: 50ch;
+    margin-bottom: 5rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 700;
+    color: var(--green-900);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .section-body {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--text-light);
+    font-weight: 300;
+  }
+
+  .channels-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 5rem;
+  }
+
+  .channel-card {
+    background: var(--white);
+    border: 1px solid rgba(13,31,21,0.08);
+    border-radius: 8px;
+    padding: 1.75rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .channel-card:hover {
+    border-color: var(--gold-400);
+    transform: translateY(-2px);
+  }
+
+  .channel-card.featured {
+    border-color: var(--gold-500);
+    background: var(--green-900);
+  }
+
+  .channel-tag {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    border-radius: 3px;
+    margin-bottom: 1rem;
+    background: var(--green-50);
+    color: var(--green-600);
+  }
+
+  .channel-card.featured .channel-tag {
+    background: rgba(201,168,76,0.15);
+    color: var(--gold-400);
+  }
+
+  .channel-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--green-900);
+    margin-bottom: 0.5rem;
+  }
+
+  .channel-card.featured .channel-name { color: var(--white); }
+
+  .channel-desc {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--text-light);
+    font-weight: 300;
+    margin-bottom: 1rem;
+  }
+
+  .channel-card.featured .channel-desc { color: rgba(255,255,255,0.55); }
+
+  .channel-meta {
+    font-size: 0.75rem;
+    color: var(--gold-500);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  .how-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    padding-top: 4rem;
+    border-top: 1px solid rgba(13,31,21,0.08);
+  }
+
+  .step {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .step-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--green-100);
+    line-height: 1;
+  }
+
+  .step-title {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--green-900);
+  }
+
+  .step-body {
+    font-size: 0.875rem;
+    line-height: 1.65;
+    color: var(--text-light);
+    font-weight: 300;
+  }
+
+  /* PRICING */
+  #pricing {
+    padding: 7rem 4rem;
+    background: var(--green-900);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #pricing::before {
+    content: '';
+    position: absolute;
+    top: -150px; right: -150px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  #pricing .section-title { color: var(--white); }
+  #pricing .section-body { color: rgba(255,255,255,0.5); }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    max-width: 900px;
+  }
+
+  .pricing-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 2.5rem;
+    transition: border-color 0.2s;
+  }
+
+  .pricing-card:hover { border-color: rgba(201,168,76,0.3); }
+
+  .pricing-card.recommended {
+    background: rgba(201,168,76,0.06);
+    border-color: var(--gold-500);
+  }
+
+  .pricing-badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    border-radius: 3px;
+    margin-bottom: 1.5rem;
+    background: rgba(201,168,76,0.15);
+    color: var(--gold-400);
+  }
+
+  .pricing-name {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.04em;
+    margin-bottom: 1rem;
+  }
+
+  .pricing-amount {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  .pricing-amount span {
+    font-size: 1rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.4);
+  }
+
+  .pricing-period {
+    font-size: 0.8125rem;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 2rem;
+    font-weight: 300;
+  }
+
+  .pricing-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .pricing-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.65);
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  .pricing-features li::before {
+    content: '';
+    display: block;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: rgba(201,168,76,0.2);
+    border: 1px solid var(--gold-500);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .pricing-features li.included::before {
+    background: var(--gold-500);
+  }
+
+  /* CONTACT */
+  #contact {
+    padding: 7rem 4rem;
+    background: var(--cream);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+    max-width: 1100px;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .contact-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .contact-detail-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-light);
+  }
+
+  .contact-detail-value {
+    font-size: 0.9375rem;
+    color: var(--green-900);
+    font-weight: 400;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .form-label {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--text-mid);
+    letter-spacing: 0.02em;
+  }
+
+  .form-input, .form-select, .form-textarea {
+    background: var(--white);
+    border: 1px solid rgba(13,31,21,0.12);
+    border-radius: 4px;
+    padding: 0.75rem 1rem;
+    font-size: 0.9375rem;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--green-900);
+    font-weight: 300;
+    transition: border-color 0.2s;
+    outline: none;
+    width: 100%;
+  }
+
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    border-color: var(--gold-500);
+  }
+
+  .form-textarea { resize: vertical; min-height: 120px; }
+
+  .form-input::placeholder, .form-textarea::placeholder {
+    color: rgba(13,31,21,0.3);
+  }
+
+  .form-select {
+    appearance: none;
+    cursor: pointer;
+  }
+
+  .btn-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: var(--green-800);
+    color: var(--white);
+    padding: 0.875rem 2rem;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 0.9375rem;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-family: 'DM Sans', sans-serif;
+    align-self: flex-start;
+  }
+
+  .btn-submit:hover { background: var(--green-700); }
+
+  /* WAITLIST SECTION */
+  .waitlist-section {
+    background: var(--green-800);
+    padding: 5rem 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 2rem;
+    border-top: 1px solid rgba(201,168,76,0.15);
+  }
+
+  .waitlist-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 700;
+    color: var(--white);
+    max-width: 30ch;
+    line-height: 1.2;
+  }
+
+  .waitlist-title .gold { color: var(--gold-400); }
+
+  .waitlist-sub {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.5);
+    max-width: 44ch;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  .waitlist-form {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .waitlist-input {
+    flex: 1;
+    min-width: 240px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 4px;
+    padding: 0.875rem 1.25rem;
+    font-size: 0.9375rem;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--white);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .waitlist-input::placeholder { color: rgba(255,255,255,0.3); }
+  .waitlist-input:focus { border-color: var(--gold-400); }
+
+  .waitlist-note {
+    font-size: 0.8125rem;
+    color: rgba(255,255,255,0.3);
+    font-weight: 300;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--green-900);
+    padding: 2.5rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(201,168,76,0.1);
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--gold-400);
+  }
+
+  .footer-copy {
+    font-size: 0.8125rem;
+    color: rgba(255,255,255,0.3);
+    font-weight: 300;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-size: 0.8125rem;
+    color: rgba(255,255,255,0.3);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--gold-400); }
+
+  /* ANIMATIONS */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    #home, #how-it-works, #pricing, #contact { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .proof-bar { padding: 1rem 1.5rem; gap: 1.5rem; }
+    .waitlist-section { padding: 4rem 1.5rem; }
+    footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-logo">Briefdex</a>
+  <ul class="nav-links">
+    <li><a href="#how-it-works">How it works</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#waitlist" class="nav-cta">Join waitlist</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-eyebrow">New Zealand's daily markets briefing</div>
+  <h1 class="hero-headline">Markets before your <span class="gold">first coffee.</span></h1>
+  <p class="hero-sub">Five short audio briefings. Every weekday morning. Built entirely from primary sources — NZX announcements, RBNZ releases, Stats NZ data. NZ-first, always.</p>
+  <div class="hero-actions">
+    <a href="#waitlist" class="btn-primary">Join the waitlist</a>
+    <a href="#how-it-works" class="btn-ghost">How it works</a>
+  </div>
+
+  <div class="hero-ticker">
+    <div class="ticker-inner">
+      <div class="ticker-item"><span class="label">NZX 50</span> 13,271 <span class="up">+1.0%</span></div>
+      <div class="ticker-item"><span class="label">OCR</span> 2.25%</div>
+      <div class="ticker-item"><span class="label">Brent Crude</span> $100.06 <span class="down">-1.19%</span></div>
+      <div class="ticker-item"><span class="label">NZD/USD</span> 0.5900</div>
+      <div class="ticker-item"><span class="label">ASX 200</span> 8,697 <span class="up">+0.09%</span></div>
+      <div class="ticker-item"><span class="label">Gold</span> $4,722</div>
+      <div class="ticker-item"><span class="label">RBA Cash Rate</span> 4.35%</div>
+      <div class="ticker-item"><span class="label">S&P 500</span> 7,200 <span class="down">-0.41%</span></div>
+      <!-- repeat for seamless loop -->
+      <div class="ticker-item"><span class="label">NZX 50</span> 13,271 <span class="up">+1.0%</span></div>
+      <div class="ticker-item"><span class="label">OCR</span> 2.25%</div>
+      <div class="ticker-item"><span class="label">Brent Crude</span> $100.06 <span class="down">-1.19%</span></div>
+      <div class="ticker-item"><span class="label">NZD/USD</span> 0.5900</div>
+      <div class="ticker-item"><span class="label">ASX 200</span> 8,697 <span class="up">+0.09%</span></div>
+      <div class="ticker-item"><span class="label">Gold</span> $4,722</div>
+      <div class="ticker-item"><span class="label">RBA Cash Rate</span> 4.35%</div>
+      <div class="ticker-item"><span class="label">S&P 500</span> 7,200 <span class="down">-0.41%</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF BAR -->
+<div class="proof-bar">
+  <div class="proof-item"><span class="proof-dot"></span>Primary sources only — NZX, RBNZ, Stats NZ</div>
+  <div class="proof-item"><span class="proof-dot"></span>Seven minutes. Every weekday. 7:30am.</div>
+  <div class="proof-item"><span class="proof-dot"></span>No app required at launch</div>
+  <div class="proof-item"><span class="proof-dot"></span>Built for the NZ investor</div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works">
+  <div class="section-header fade-up">
+    <div class="section-label">The product</div>
+    <h2 class="section-title">Five channels. One morning routine.</h2>
+    <p class="section-body">Briefdex delivers five daily audio briefings covering everything that moves New Zealand markets. Free for the Daily Wrap. Premium for the deep dives.</p>
+  </div>
+
+  <div class="channels-grid">
+    <div class="channel-card featured fade-up">
+      <div class="channel-tag">Free</div>
+      <div class="channel-name">Daily Wrap</div>
+      <div class="channel-desc">Seven minutes. Every weekday. The complete picture — NZX, RBNZ, global markets, macro, and what to watch today.</div>
+      <div class="channel-meta">7 min &nbsp;·&nbsp; Every weekday &nbsp;·&nbsp; Free forever</div>
+    </div>
+    <div class="channel-card fade-up">
+      <div class="channel-tag">Premium</div>
+      <div class="channel-name">NZ Markets</div>
+      <div class="channel-desc">Yesterday's NZX session in full — movers, announcements, broker activity, and one name to watch.</div>
+      <div class="channel-meta">5 min &nbsp;·&nbsp; Every weekday</div>
+    </div>
+    <div class="channel-card fade-up">
+      <div class="channel-tag">Premium</div>
+      <div class="channel-name">Macro & RBNZ</div>
+      <div class="channel-desc">OCR decisions, RBNZ communications, Stats NZ releases, and what they mean for your portfolio.</div>
+      <div class="channel-meta">1–4 min &nbsp;·&nbsp; Mon / Wed / Fri + event-triggered</div>
+    </div>
+    <div class="channel-card fade-up">
+      <div class="channel-tag">Premium</div>
+      <div class="channel-name">Global Markets</div>
+      <div class="channel-desc">Wall Street, European markets, Asian session, oil, gold, and currencies — filtered for the NZ investor.</div>
+      <div class="channel-meta">4 min &nbsp;·&nbsp; Every weekday</div>
+    </div>
+    <div class="channel-card fade-up">
+      <div class="channel-tag">Premium</div>
+      <div class="channel-name">Trans-Tasman</div>
+      <div class="channel-desc">The ASX and RBA — and why what happens across the Tasman matters for your NZX positions.</div>
+      <div class="channel-meta">3 min &nbsp;·&nbsp; Every weekday</div>
+    </div>
+  </div>
+
+  <div class="how-steps">
+    <div class="step fade-up">
+      <div class="step-num">01</div>
+      <div class="step-title">Primary sources ingested overnight</div>
+      <div class="step-body">NZX announcements, RBNZ releases, Stats NZ data, Beehive press releases — pulled directly from the source, every night.</div>
+    </div>
+    <div class="step fade-up">
+      <div class="step-num">02</div>
+      <div class="step-title">Script written and verified</div>
+      <div class="step-body">AI drafts the script against a verified fact-check block. Every number is confirmed before a word is written.</div>
+    </div>
+    <div class="step fade-up">
+      <div class="step-num">03</div>
+      <div class="step-title">Audio delivered by 7:30am</div>
+      <div class="step-body">Your briefing is ready before the market opens. Listen on your commute, your walk, or at your desk.</div>
+    </div>
+    <div class="step fade-up">
+      <div class="step-num">04</div>
+      <div class="step-title">Walk in informed</div>
+      <div class="step-body">Seven minutes later, you know what moved overnight, what the RBNZ is watching, and what to track today.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="section-header fade-up">
+    <div class="section-label" style="color: var(--gold-400);">Pricing</div>
+    <h2 class="section-title">Simple. No surprises.</h2>
+    <p class="section-body">Start free. Upgrade when you're ready. Cancel any time.</p>
+  </div>
+
+  <div class="pricing-grid">
+    <div class="pricing-card fade-up">
+      <div class="pricing-name">Free</div>
+      <div class="pricing-amount">$0 <span>/ month</span></div>
+      <div class="pricing-period">No credit card required</div>
+      <ul class="pricing-features">
+        <li class="included">Daily Wrap — 7 minutes, every weekday</li>
+        <li>NZ Markets channel</li>
+        <li>Macro & RBNZ channel</li>
+        <li>Global Markets channel</li>
+        <li>Trans-Tasman channel</li>
+      </ul>
+      <a href="#waitlist" class="btn-ghost" style="width: 100%; justify-content: center;">Join waitlist</a>
+    </div>
+    <div class="pricing-card recommended fade-up">
+      <div class="pricing-badge">Most popular</div>
+      <div class="pricing-name">Premium</div>
+      <div class="pricing-amount">$14.99 <span>/ month</span></div>
+      <div class="pricing-period">Or $119.99 per year — save two months</div>
+      <ul class="pricing-features">
+        <li class="included">Daily Wrap — 7 minutes, every weekday</li>
+        <li class="included">NZ Markets channel</li>
+        <li class="included">Macro & RBNZ channel</li>
+        <li class="included">Global Markets channel</li>
+        <li class="included">Trans-Tasman channel</li>
+      </ul>
+      <a href="#waitlist" class="btn-primary" style="width: 100%; justify-content: center;">Start 7-day free trial</a>
+    </div>
+  </div>
+</section>
+
+<!-- WAITLIST -->
+<div class="waitlist-section" id="waitlist">
+  <h2 class="waitlist-title">Be first when <span class="gold">Briefdex launches.</span></h2>
+  <p class="waitlist-sub">Join the waitlist and get early access, plus a free extended trial when we open the doors.</p>
+  <form class="waitlist-form" onsubmit="handleWaitlist(event)">
+    <input type="email" class="waitlist-input" placeholder="Your email address" required id="waitlist-email">
+    <button type="submit" class="btn-primary">Join waitlist</button>
+  </form>
+  <p class="waitlist-note">No spam. Just a note when we launch.</p>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header fade-up">
+    <div class="section-label">Get in touch</div>
+    <h2 class="section-title">Talk to the founder.</h2>
+    <p class="section-body">Whether you're interested in beta access, a partnership, or just want to know more — reach out directly.</p>
+  </div>
+
+  <div class="contact-grid">
+    <div class="contact-info fade-up">
+      <div class="contact-detail">
+        <div class="contact-detail-label">Founder</div>
+        <div class="contact-detail-value">Patrick Long</div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-label">Email</div>
+        <div class="contact-detail-value">patrickjlong4@gmail.com</div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-label">Based in</div>
+        <div class="contact-detail-value">Auckland, New Zealand</div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-label">Launching</div>
+        <div class="contact-detail-value">Late 2026</div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-label">Beta access</div>
+        <div class="contact-detail-value">Available now for a limited group of NZ finance professionals</div>
+      </div>
+    </div>
+
+    <form class="contact-form fade-up" onsubmit="handleContact(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">First name</label>
+          <input type="text" class="form-input" placeholder="James" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Last name</label>
+          <input type="text" class="form-input" placeholder="Wilson">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-input" placeholder="james@company.co.nz" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">I'm interested in</label>
+        <select class="form-select">
+          <option value="">Select one</option>
+          <option>Beta access</option>
+          <option>Partnership or collaboration</option>
+          <option>Investment</option>
+          <option>General enquiry</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Message</label>
+        <textarea class="form-textarea" placeholder="Tell us a bit about yourself and what you're interested in..."></textarea>
+      </div>
+      <button type="submit" class="btn-submit">Send message</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Briefdex</div>
+  <p class="footer-copy">© 2026 Briefdex. Auckland, New Zealand.</p>
+  <ul class="footer-links">
+    <li><a href="#">Privacy</a></li>
+    <li><a href="#">Terms</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  function handleWaitlist(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button');
+    const input = document.getElementById('waitlist-email');
+    btn.textContent = "You're on the list";
+    btn.style.background = '#3d8a55';
+    input.value = '';
+    input.placeholder = 'Thank you — we will be in touch.';
+    input.disabled = true;
+    btn.disabled = true;
+  }
+
+  function handleContact(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button');
+    btn.textContent = 'Message sent';
+    btn.style.background = '#3d8a55';
+    btn.disabled = true;
+  }
+</script>
+</body>
+</html>
