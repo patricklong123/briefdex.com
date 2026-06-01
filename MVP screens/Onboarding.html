@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Briefdex — Onboarding Flow</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --g900: #0a1a10;
+  --g800: #1a3a28;
+  --g700: #1e4a2f;
+  --g600: #2d6a42;
+  --g500: #3d8a55;
+  --g200: #a8d4b4;
+  --g100: #d4e8d8;
+  --g50:  #eaf3ec;
+  --gold: #c9a84c;
+  --gold2: #d4b86a;
+  --gold3: #e8d4a0;
+  --goldfaint: rgba(201,168,76,0.12);
+  --cream: #faf7f2;
+  --white: #ffffff;
+  --red: #e05c5c;
+  --blue: #5c9ee0;
+}
+
+body {
+  background: #111;
+  font-family: 'DM Sans', sans-serif;
+  padding: 48px 24px;
+}
+
+/* PAGE HEADER */
+.page-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+.page-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.page-header p {
+  color: rgba(255,255,255,0.4);
+  font-size: 0.875rem;
+  font-weight: 300;
+}
+
+/* SECTION LABEL */
+.section-label {
+  text-align: center;
+  margin: 64px 0 32px;
+  color: rgba(255,255,255,0.25);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.section-label span {
+  color: var(--gold);
+  opacity: 0.7;
+}
+
+/* SCREENS ROW */
+.screens-row {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+/* PHONE FRAME */
+.phone {
+  width: 320px;
+  height: 640px;
+  background: var(--g900);
+  border-radius: 44px;
+  border: 2px solid rgba(255,255,255,0.1);
+  box-shadow:
+    0 0 0 6px #1a1a1a,
+    0 0 0 8px rgba(255,255,255,0.05),
+    0 32px 64px rgba(0,0,0,0.6);
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.phone::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 28px;
+  background: #1a1a1a;
+  border-radius: 20px;
+  z-index: 10;
+}
+
+.screen {
+  position: absolute;
+  inset: 0;
+  border-radius: 44px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* SCREEN LABEL BELOW */
+.screen-label {
+  text-align: center;
+  margin-top: 12px;
+  color: rgba(255,255,255,0.3);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+.screen-label strong {
+  color: rgba(255,255,255,0.6);
+  display: block;
+  font-size: 0.75rem;
+  margin-bottom: 2px;
+}
+
+/* STATUS BAR */
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 48px 20px 8px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.6);
+  flex-shrink: 0;
+  font-family: 'DM Mono', monospace;
+}
+.status-icons { display: flex; gap: 4px; align-items: center; }
+.status-icon { width: 14px; height: 8px; background: rgba(255,255,255,0.6); border-radius: 2px; }
+.status-icon.wifi { clip-path: polygon(50% 0%, 100% 60%, 75% 60%, 75% 100%, 25% 100%, 25% 60%, 0% 60%); width: 12px; height: 10px; }
+
+/* SCREEN CONTENT AREA */
+.screen-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 24px 32px;
+  overflow: hidden;
+}
+
+/* ============= SCREEN VARIANTS ============= */
+
+/* 1.1 BRAND WELCOME */
+.s-welcome {
+  background: var(--g900);
+  background-image:
+    radial-gradient(ellipse 60% 40% at 50% 20%, rgba(201,168,76,0.1) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 80% 80%, rgba(61,138,85,0.08) 0%, transparent 60%);
+}
+.s-welcome .screen-body {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+}
+.welcome-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--gold);
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+.welcome-tagline {
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.5);
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: 0.02em;
+}
+.welcome-sub {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.35);
+  font-weight: 300;
+  line-height: 1.6;
+  max-width: 200px;
+  margin-top: 8px;
+}
+.welcome-orb {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,168,76,0.3) 0%, rgba(61,138,85,0.1) 50%, transparent 70%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  position: relative;
+}
+.welcome-orb::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.3);
+}
+.welcome-orb::after {
+  content: '';
+  position: absolute;
+  inset: 20px;
+  border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.15);
+}
+.welcome-icon { font-size: 2rem; }
+
+/* 1.2 AUTH */
+.s-auth { background: var(--g900); }
+.s-auth .screen-body { justify-content: center; gap: 12px; }
+.auth-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.auth-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 12px 16px;
+  color: rgba(255,255,255,0.8);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+.auth-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+}
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: rgba(255,255,255,0.2);
+  font-size: 0.7rem;
+}
+.auth-divider::before, .auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255,255,255,0.1);
+}
+.auth-input {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 11px 14px;
+  color: rgba(255,255,255,0.5);
+  font-size: 0.8rem;
+  font-family: 'DM Sans', sans-serif;
+}
+.auth-trust {
+  text-align: center;
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.25);
+  font-weight: 300;
+}
+
+/* VALUE SCREENS */
+.s-value { background: var(--g900); }
+.s-value .screen-body { justify-content: flex-end; gap: 0; }
+.value-visual {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.value-content { padding-bottom: 8px; }
+.value-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+.value-body {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.65;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+.value-tag {
+  display: inline-block;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+/* TABS VISUAL (problem screen) */
+.tabs-visual {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  padding: 16px;
+  width: 100%;
+}
+.tab-chip {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 0.55rem;
+  color: rgba(255,255,255,0.4);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.tab-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+.tab-dot.green { background: var(--g500); }
+.tab-dot.gold { background: var(--gold); }
+.tab-dot.red { background: var(--red); }
+.tab-dot.blue { background: var(--blue); }
+
+/* CLOCK VISUAL */
+.clock-visual {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 2px solid rgba(201,168,76,0.3);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.clock-hand-hour {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  width: 2px;
+  height: 32px;
+  background: var(--gold);
+  transform-origin: bottom center;
+  transform: translateX(-50%) rotate(-30deg);
+  border-radius: 2px;
+}
+.clock-hand-min {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  width: 2px;
+  height: 44px;
+  background: rgba(255,255,255,0.6);
+  transform-origin: bottom center;
+  transform: translateX(-50%) rotate(120deg);
+  border-radius: 2px;
+}
+.clock-center {
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  position: absolute;
+}
+.clock-stat {
+  position: absolute;
+  bottom: -36px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  text-align: center;
+}
+.clock-stat .big { font-size: 1.4rem; font-weight: 700; color: var(--gold); font-family: 'Playfair Display', serif; }
+.clock-stat .small { font-size: 0.6rem; color: rgba(255,255,255,0.4); }
+
+/* SUNRISE VISUAL */
+.sunrise-visual {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+  overflow: hidden;
+}
+.sunrise-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, var(--g900) 0%, rgba(26,58,40,0.6) 50%, rgba(201,168,76,0.15) 100%);
+}
+.sunrise-orb {
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,168,76,0.6) 0%, rgba(201,168,76,0.1) 60%, transparent 80%);
+}
+.sunrise-figure {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 12px;
+  font-size: 2.5rem;
+  filter: brightness(0.4);
+}
+.sunrise-lines {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(201,168,76,0.4), transparent);
+}
+
+/* SOURCE VISUAL */
+.source-visual {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 20px;
+  width: 100%;
+}
+.source-chip {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.source-abbr {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+}
+.source-name {
+  font-size: 0.5rem;
+  color: rgba(255,255,255,0.3);
+  text-align: center;
+}
+.source-arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-column: span 2;
+  color: var(--gold);
+  font-size: 0.7rem;
+  gap: 6px;
+}
+.source-final {
+  grid-column: span 2;
+  background: rgba(201,168,76,0.08);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 10px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 0.65rem;
+  color: var(--gold);
+  font-weight: 500;
+}
+
+/* SOCIAL PROOF */
+.s-social { background: var(--g900); }
+.s-social .screen-body { justify-content: center; gap: 16px; }
+.social-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--white);
+}
+.proof-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 12px;
+  padding: 14px;
+}
+.proof-logos {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+.proof-logo {
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 0.55rem;
+  font-weight: 600;
+  color: var(--gold2);
+  letter-spacing: 0.05em;
+}
+.proof-text {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.5);
+  font-style: italic;
+  line-height: 1.55;
+  font-weight: 300;
+}
+.proof-dots {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+.proof-dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,0.15); }
+.proof-dot.active { background: var(--gold); }
+
+/* SURVEY SCREENS */
+.s-survey { background: var(--g900); }
+.s-survey .screen-body { justify-content: center; gap: 12px; }
+.survey-progress {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 4px;
+}
+.progress-pip {
+  flex: 1;
+  height: 2px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 2px;
+}
+.progress-pip.done { background: var(--gold); }
+.progress-pip.active { background: rgba(201,168,76,0.5); }
+.survey-label {
+  font-size: 0.6rem;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.survey-q {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.3;
+}
+.survey-options { display: flex; flex-direction: column; gap: 7px; }
+.survey-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.7);
+  font-weight: 400;
+}
+.survey-option.selected {
+  background: rgba(201,168,76,0.1);
+  border-color: rgba(201,168,76,0.4);
+  color: var(--white);
+}
+.survey-radio {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.survey-radio.checked {
+  border-color: var(--gold);
+  background: rgba(201,168,76,0.15);
+}
+.survey-radio.checked::after {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+.survey-check {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.survey-check.checked {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: var(--g900);
+  font-size: 0.5rem;
+  font-weight: 700;
+}
+
+/* BRAND SCREEN */
+.s-brand {
+  background: var(--g900);
+  background-image: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,168,76,0.08) 0%, transparent 70%);
+}
+.s-brand .screen-body {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+}
+.brand-logo-ring {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.brand-logo-ring::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.15);
+}
+.brand-logo-inner {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: var(--gold);
+}
+.brand-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--white);
+}
+.brand-body {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.65;
+  font-weight: 300;
+  max-width: 220px;
+}
+.brand-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.brand-tag {
+  background: rgba(201,168,76,0.08);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 20px;
+  padding: 3px 10px;
+  font-size: 0.58rem;
+  color: var(--gold2);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+/* LOADING SCREEN */
+.s-loading {
+  background: var(--g900);
+  background-image: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(201,168,76,0.06) 0%, transparent 70%);
+}
+.s-loading .screen-body {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+}
+.loading-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--white);
+}
+.loading-bar-track {
+  width: 100%;
+  height: 3px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.loading-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--g600), var(--gold));
+  border-radius: 2px;
+}
+.loading-status {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.4);
+  font-weight: 300;
+  font-style: italic;
+  min-height: 18px;
+}
+.loading-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  text-align: left;
+}
+.loading-step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.7rem;
+  font-weight: 400;
+}
+.loading-step.done { color: rgba(255,255,255,0.6); }
+.loading-step.active { color: var(--white); }
+.loading-step.pending { color: rgba(255,255,255,0.2); }
+.step-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.5rem;
+  font-weight: 700;
+}
+.step-icon.done { background: var(--g600); color: white; }
+.step-icon.active { background: var(--gold); color: var(--g900); }
+.step-icon.pending { background: rgba(255,255,255,0.08); color: transparent; }
+
+/* PAYWALL */
+.s-paywall { background: var(--g900); }
+.s-paywall .screen-body { justify-content: center; gap: 12px; }
+.paywall-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.3;
+}
+.paywall-sub {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.5);
+  font-weight: 300;
+}
+.trust-row {
+  display: flex;
+  gap: 6px;
+}
+.trust-pill {
+  flex: 1;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 6px 5px;
+  text-align: center;
+  font-size: 0.55rem;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.5;
+  font-weight: 400;
+}
+.trust-pill span { display: block; color: var(--gold2); font-size: 0.7rem; margin-bottom: 1px; }
+.price-card {
+  background: rgba(201,168,76,0.07);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 14px;
+  padding: 16px;
+}
+.price-amount {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 2px;
+}
+.price-amount span { font-size: 0.85rem; color: rgba(255,255,255,0.4); font-family: 'DM Sans', sans-serif; font-weight: 300; }
+.price-period { font-size: 0.65rem; color: rgba(255,255,255,0.35); margin-bottom: 10px; }
+.price-divider { height: 1px; background: rgba(255,255,255,0.06); margin-bottom: 10px; }
+.price-annual { font-size: 0.65rem; color: var(--gold2); font-weight: 500; }
+.paywall-no-escape {
+  background: rgba(201,168,76,0.05);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 8px;
+  padding: 8px 10px;
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+}
+.no-escape-icon { font-size: 0.7rem; margin-top: 1px; flex-shrink: 0; }
+.no-escape-text { font-size: 0.6rem; color: rgba(255,255,255,0.35); line-height: 1.5; }
+.legal-text { font-size: 0.55rem; color: rgba(255,255,255,0.2); text-align: center; line-height: 1.55; }
+
+/* FIRST USE */
+.s-firstuse {
+  background: var(--g900);
+  background-image: radial-gradient(ellipse 70% 40% at 50% 20%, rgba(61,138,85,0.12) 0%, transparent 60%);
+}
+.s-firstuse .screen-body {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+}
+.firstuse-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--white);
+}
+.firstuse-sub { font-size: 0.75rem; color: rgba(255,255,255,0.5); font-weight: 300; }
+.play-btn-large {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--g600), var(--g500));
+  border: 2px solid rgba(201,168,76,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 32px rgba(61,138,85,0.3);
+}
+.play-triangle {
+  width: 0;
+  height: 0;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-left: 20px solid var(--white);
+  margin-left: 4px;
+}
+.episode-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 12px;
+  width: 100%;
+  text-align: left;
+}
+.episode-type {
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+.episode-title { font-size: 0.75rem; color: var(--white); font-weight: 500; margin-bottom: 4px; }
+.episode-meta { font-size: 0.6rem; color: rgba(255,255,255,0.35); }
+.progress-bar {
+  height: 2px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 2px;
+  margin-top: 8px;
+  overflow: hidden;
+}
+.progress-fill { height: 100%; width: 0%; background: var(--gold); border-radius: 2px; }
+.firstuse-tip {
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.25);
+  font-style: italic;
+  line-height: 1.5;
+  max-width: 220px;
+}
+
+/* SHARED BUTTON */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 12px;
+  padding: 13px 16px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  border: none;
+}
+.btn-gold { background: var(--gold); color: var(--g900); }
+.btn-ghost { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.1); }
+.btn-outline { background: transparent; color: var(--gold); border: 1px solid rgba(201,168,76,0.3); }
+
+/* BACK INDICATOR */
+.back-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255,255,255,0.35);
+  font-size: 0.7rem;
+  margin-bottom: 4px;
+  padding: 0 0 4px;
+}
+.back-arrow { font-size: 0.8rem; }
+
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Briefdex — Onboarding Flow</h1>
+  <p>16 screens · Mid-fidelity · Dark green + gold brand · May 2026</p>
+</div>
+
+<!-- ============= SECTION 1: WELCOME + AUTH ============= -->
+<div class="section-label"><span>Section 1</span> — Welcome + Authentication</div>
+<div class="screens-row">
+
+  <!-- Screen 1.1 -->
+  <div>
+    <div class="phone">
+      <div class="screen s-welcome">
+        <div class="status-bar">9:41<div class="status-icons"><div class="status-icon"></div><div class="status-icon"></div></div></div>
+        <div class="screen-body">
+          <div class="welcome-orb">
+            <div class="welcome-icon">◎</div>
+          </div>
+          <div>
+            <div class="welcome-logo">Briefdex</div>
+            <div class="welcome-tagline">Markets before your first coffee.</div>
+          </div>
+          <div class="welcome-sub">New Zealand's daily audio briefing for serious investors.</div>
+          <div style="height: 12px;"></div>
+          <button class="btn btn-gold" style="width:100%">Get started</button>
+        </div>
+      </div>
+    </div>
+    <div class="screen-label"><strong>Screen 1.1</strong>Brand Welcome</div>
+  </div>
+
+  <!-- Screen 1.2 -->
+  <div>
+    <div class="phone">
+      <div class="screen s-auth">
+        <div class="status-bar">9:41<div class="status-icons"><div class="status-icon"></div><div class="status-icon"></div></div></div>
+        <div class="screen-body">
+          <div style="margin-bottom: 8px;">
+            <div class="auth-title">Let's get you set up.</div>
+          </div>
+          <div class="auth-btn">
+            <div class="auth-icon" style="background:#000; font-size:0.7rem;"></div>
+            Continue with Apple
+          </div>
+          <div class="auth-btn">
+            <div class="auth-icon" style="background:#4285F4;">G</div>
+            Continue with Google
+          </div>
+          <div class="auth-divider">or</div>
+          <div class="auth-input">your@email.co.nz</div>
+          <button class="btn btn-gold" style="width:100%;margin-top:4px;">Continue with email</button>
+          <div class="auth-trust" style="margin-top: 8px;">🔒 We never share your data.</div>
+        </div>
+      </div>
+    </div>
+    <div class="screen-label"><strong>Screen 1.2</strong>Authentication</div>
+  </div>
+
+</div>
+
+<!-- ============= SECTION 2: VALUE SCREENS ============= -->
+<div class="section-label"><span>Section 2</span> — Value Screens / Problem Agitation</div>
+<div class="screens-row">
+
+  <!-- Screen 2.1 The Problem -->
+  <div>
+    <div class="phone">
+      <div class="screen s-value">
+        <div class="status-bar">9:41<div class="status-icons"><div class="status-icon"></div><div class="status-icon"></div></div></div>
+        <div class="screen-body">
+          <div class="value-visual">
+            <div class="tabs-visual">
+              <div class="tab-chip"><div class="tab-dot green"></div>NZX Announce...</div>
+              <div class="tab-chip"><div class="tab-dot gold"></div>RBNZ Statement</div>
+              <div class="tab-chip"><div class="tab-dot blue"></div>Bloomberg</div>
+              <div class="tab-chip"><div class="tab-dot green"></div>Stats NZ Data</div>
+              <div class="tab-chip"><div class="tab-dot gold"></div>ASX Close</div>
+              <div class="tab-chip"><div class="tab-dot blue"></div>RBA Decision</div>
+              <div class="tab-chip"><div class="tab-dot green"></div>GDT Dairy</div>
+              <div class="tab-chip"><div class="tab-dot gold"></div>Beehive</div>
+              <div class="tab-chip"><div class="tab-dot blue"></div>CME Futures</div>
+              <div class="tab-chip"><div class="tab-dot green"></div>EIA Energy</div>
+            </div>
+          </div>
+          <div class="value-content">
+            <div class="value-tag">The problem</div>
+            <div class="value-headline">You're drowning in finance news.</div>
+            <div class="value-body">NZX announcements. RBNZ releases. Stats NZ data. Bloomberg. RBA. Every morning, scattered across sources. By the time you've caught up, the market is already open.</div>
+            <button class="btn btn-gold" style="width:100%">I feel this</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="screen-label"><strong>Screen 2.1</strong>The Problem</div>
+  </div>
+
+  <!-- Screen 2.2 The Cost -->
+  <div>
+    <div class="phone">
+      <div class="screen s-value">
+        <div class="status-bar">9:41<div class="status-icons"><div class="status-icon"></div><div class="status-icon"></div></div></div>
+        <div class="screen-body">
+          <div class="value-visual">
+            <div style="position: relative; padding-bottom: 40px;">
+              <div class="clock-visual">
+                <div class="clock-hand-hour"></div>
+                <div class="clock-hand-min"></div>
+                <div class="clock-center"></div>
+              </div>
+              <div class="clock-stat">
+                <div class="big">165 hrs</div>
+                <div class="small">lost per year to reading</div>
+              </div>
+            </div>
+          </div>
+          <div class="value-content">
+            <div class="value-tag">The cost</div>
+            <div class="value-headline">What does that time cost you?</div>
+            <div class="value-body">38 minutes a day. 165 hours a year. Three working weeks. Gone. Reading instead of listening, deciding, or sleeping.</div>
+            <button class="btn btn-gold" style="width:100%">Show me a better way</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="screen-label"><strong>Screen 2.2</strong>The Cost</div>
+  </div>
+
+  <!-- Screen 2.3 The Promise -->
+  <div>
+    <div class="phone">
+      <div class="screen s-value">
+        <div class="status-bar">9:41<div class="status-icons"><div class="status-icon"></div><div class="status-icon"></div></div></div>
+        <div class="screen-body">
+          <div class="value-visual">
+            <div class="sunrise-visual">
+              <div class="sunrise-bg"></div>
+              <div class="sunrise-orb"></div>
+              <div class="sunrise-figure">🎧</div>
+              <div style="position: relative; z-index: 2; margin-bottom: 12px; text-align: center;">
+                <div style="font-size:0.6rem; color: rgba(255,255,255,0.4); font-weight:300;">7:00 AM</div>
+                <div style="font-size:0.55rem; color: var(--gold); font-weight:500; margin-top:2px;">▶ Today's Daily Wrap</div>
+              </div>
+              <div class="sunrise-lines"></div>
+            </div>
+          </div>
+          <div class="value-content">
+            <div class="value-tag">The promise</div>
+            <div class="value-headline">Imagine waking up already briefed.</div>
+            <div class="value-body">Your alarm plays today's briefing. Seven minutes. By the time you've made coffee, you know everything you need to know.</div>
+            <button class="btn btn-gold" style="width:100%">I want this</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="screen-label"><strong>Screen 2.3</strong>The Promise</div>
+  </div>
+
+  <!-- Screen 2.4 The Method -->
+  <div>
+    <div class="phone">
+      <div class="screen s-value">
+        <div class="status-bar">9:41<div class="status-icons"><div class="status-icon"></div><div class="status-icon"></div></div></div>
+        <div class="screen-body">
+          <div class="value-visual">
+            <div class="source-visual">
+              <div class="source-chip"><div class="source-abbr">NZX</div><div class="source-name">Announcements</div></div>
+              <div class="source-chip"><div class="source-abbr">RBNZ</div><div class="source-name">Releases & OCR</div></div>
+              <div class="source-chip"><div class="source-abbr">SNZ</div><div class="source-name">Stats NZ Data</div></div>
+              <div class="source-chip"><div class="source-abbr">BBG</div><div class="source-name">Bloomberg</div></div>
+              <div class="source-arrow">↓ AI scripts + editor review ↓</div>
+              <div class="source-final">🎙 Professional audio · 7:30am NZT</div>
+            </div>
+          </div>
+          <div class="value-content">
+            <div class="value-tag">The method</div>
+            <div class="value-headline">Built on primary sources only.</div>
+            <div class="value-body">No summarised journalism. Direct from NZX, RBNZ, Stats NZ, and Bloomberg. AI scripted. Editor reviewed. Voice generated.</div>
+            <button class="btn btn-gold" style="width:100%">Continue</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="screen-label"><strong>Screen 2.4</strong>The Method</div>
+  </div>
+
+</div>
+
+<!-- ============= SECTION 3: SOCIAL PROOF ============= -->
+<div class="section-label"><span>Section 3</span> — Social Proof</div>
+<div class="screens-row">
+
+  <!-- Screen 3.1 -->
+  <div>
+    <div class="phone">
+      <div class="screen s-social">
+        <div class="status-bar">9:41<div class="status-icons"><div class="status-icon"></div><div class="status-icon"></div></div></div>
+        <div class="screen-body">
+          <div class="social-title">Built for people like you.</div>
+          <div class="proof-card">
+            <div class="proof-logos">
+              <div class="proof-logo">FMA</div>
+              <div class="proof-logo">MAS</div>
+              <div class="proof-logo">FSC</div>
+              <div class="proof-logo">Chapman Tripp</div>
+            </div>
+            <div class="proof-text">"Beta tested by professionals across NZ's leading finance and legal institutions."</div>
+          </div>
+          <div class="proof-card">
+            <div class="proof-text">"I've stopped reading the NZ Herald business section. Briefdex tells me everything I need before I get to work."</div>
+            <div style="font-size:0.6rem; color: var(--gold); margin-top:6px; font-weight:500;">— Beta tester, Auckland</div>
+          </div>
+          <div class="proof-dots">
+            <div class="proof-dot active"></div>
+            <div class="proof-dot"></div>
+            <div class="proof-dot"></div>
+          </div>
+          <button class="btn btn-gold" style="width:100%">Continue</button>
+        </div>
+      </div>
+    </div>
+    <div class="screen-label"><strong>Screen 3.1</strong>Social Proof</div>
+  </div>
+
+</div>
+
+<!-- ============= SECTION 4: SURVEY ============= -->
+<div class="section-label"><span>Section 4</span> — Survey / Psychological Commitment</div>
+<div class="screens-row">
+
+  <!-- Screen 4.1 Identity -->
+  <div>
+    <div class="phone">
+      <div class="screen s-survey">
+        <div class="status-bar">9:41<div class="status-icons"><div class="status-icon"></div><div class="status-icon"></div></div></div>
+        <div class="screen-body">
+          <div class="survey-progress">
+            <div class="progress-pip active"></div>
+            <div class="progress-pip"></div>
+            <div class="progress-pip"></div>
+            <div class="progress-pip"></div>
+            <div class="progress-pip"></div>
+            <div class="progress-pip"></div>
+          </div>
+          <div class="survey-label">Question 1 of 6</div>
+          <div class="survey-q">Which best describes you?</div>
+          <div class="survey-options">
+            <div class="survey-option selected">
+              <div class="survey-radio checked"></div>Finance professional
+            </div>
+            <div class="survey-option">
+              <div class="survey-radio"></div>Active retail investor
+            </div>
+            <div class="survey-option">
+              <div class="survey-radio"></div>Looking to become a better investor
+            </div>
+            <div class="survey-option">
+              <div class="survey-radio"></div>Want to be more financially informed
+            </div>
+            <div class="survey-option">
+              <div class="survey-radio"></div>Senior professional (non-finance)
+            </div>
+            <div class="survey-option">
+              <div class="survey-radio"></div>Founder or business owner
+            </div>
+            <div class="survey-option">
+              <div class="survey-radio"></div>Student or early-career
+            </div>
+          </div>
+          <button class="btn btn-gold" style="width:100%;margin-top:4px;">Continue</button>
+        </div>
+      </div>
+    </div>
+    <div class="screen-label"><strong>Screen 4.1</strong>Identity</div>
+  </div>
+
+  <!-- Screen 4.2 Goal -->
+  <div>
+    <div class="phone">
+      <div class="screen s-survey">
+        <div class="status-bar">9:41<div class="status-icons"><div class="status-icon"></div><div class="status-icon"></div></div></div>
+        <div class="screen-body">
+          <div class="survey-progress">
+            <div class="progress-pip done"></div>
+            <div class="progress-pip active"></div>
+            <div class="progress-pip"></div>
+            <div class="progress-pip"></div>
+            <div class="progress-pip"></div>
+            <div class="progress-pip"></div>
+          </div>
+          <div class="survey-label">Question 2 of 6 · select all that apply</div>
+          <div class="survey-q">What brings you to Briefdex?</div>
+          <div class="survey-options">
+            <div class="survey-option selected">
+              <div class="survey-check checked">✓</div>Stay informed without 45 mins of reading
+            </div>
+            <div class="survey-option selected">
+              <div class="survey-check checked">✓</div>Understand the NZX before my first meeting
+            </div>
+            <div class="survey-option">
+              <div class="survey-check"></div>Better KiwiSaver decisions
+            </div>
+            <div class="survey-option">
+              <div class="survey-check"></div>Be the most informed in the room
+            </div>
+            <div class="survey-option">
+              <div class="survey-check"></div>Stay across my investments day to day
+            </div>
+          </div>
+          <button class="btn btn-gold" style="width:100%;margin-top:4px;">Continue</button>
+        </div>
+      </div>
+    </div>
+    <div class="screen-label"><strong>Screen 4.2</strong>Goals</div>
+  </div>
+
+  <!-- Screen 4.3 Frustration -->
+  <div>
+    <div class="phone">
+      <div class="screen s-survey">
+        <div class="status-bar">9:41<div class="status-icons"><div class="status-icon"></div><div class="status-icon"></div></div></div>
+        <div class="screen-body">
+          <div class="survey-progress">
+            <div class="progress-pip done"></div>
+            <div class="progress-pip done"></div>
+            <div class="progress-pip active"></div>
+            <div class="progress-pip"></div>
+            <div class="progress-pip"></div>
+            <div class="progress-pip"></div>
+          </div>
+          <div class="survey-label">Question 3 of 6</div>
+          <div class="survey-q">What frustrates you most about finance news?</div>
+          <div class="survey-options">
+            <div class="survey-option">
+              <div class="survey-radio"></div>Too fragmented across sources
+            </div>
+            <div class="survey-option selected">
+              <div class="survey-radio checked"></div>Not focused on New Zealand
+            </div>
+            <div class="survey-option">
+              <div class="survey-radio"></div>Written not audio
+            </div>
+            <div class="survey-option">
+              <div class="survey-radio"></div>Behind too many paywalls
+            </div>
+            <div class="survey-option">
+              <div class="survey-radio"></div>I don't know where to even start
+            </div>
+            <div class="survey-option">
+              <div class="survey-radio"></div>All of the above
+            </div>
+          </div>
+          <button class="btn btn-gold" style="width:100%;margin-top:4px;">Continue</button>
+        </div>
+      </div>
+    </div>
+    <div class="screen-label"><strong>Screen 4.3</strong>Frustrations</div>
+  </div>
+
+  <!-- Screen 4.4 Projection -->
+  <div>
+    <div class="phone">
+      <div class="screen s-survey">
+        <div class="status-bar">9:41<div class="status-icons"><div class="status-icon"></div><div class="status-icon"></div></div></div>
+        <div class="screen-body">
+          <div class="survey-progress">
+            <div class="progress-pip done"></div>
+            <div class="progress-pip done"></div>
+            <div class="progress-pip done"></div>
+            <div class="progress-pip active"></div>
+            <div class="progress-pip"></div>
+            <div class="progress-pip"></div>
+          </div>
+          <div class="survey-label">Question 4 of 6</div>
+          <div class="survey-q">Where do you want to be in six months?</div>
+          <div class="survey-options">
+            <div class="survey-option">
+              <div class="survey-radio"></div>Confident in finance conversations
+            </div>
+            <div class="survey-option selected">
+              <div class="survey-radio checked"></div>Making sharper investing decisions
+            </div>
+            <div class="survey-option">
+              <div class="survey-radio"></div>Up to speed without it taking over my mornings
+            </div>
+            <div class="survey-option">
+              <div class="survey-radio"></div>Understanding the RBNZ and why it matters
+            </div>
+            <div class="survey-option">
+              <div class="survey-radio"></div>All of these
+            </div>
+          </div>
+          <button class="btn btn-gold" style="width:100%;margin-top:4px;">Continue</button>
+        </div>
+      </div>
+    </div>
+    <div class="screen-label"><strong>Screen 4.4</strong>Goal Projection</div>
+  </div>
+
+  <!-- Screen 4.5 Listening Habits -->
+  <div>
+    <div class="phone">
+      <div class="screen s-survey">
+        <div class="status-bar">9:41<div class="status-icons"><div class="status-icon"></div><div class="status-icon"></div></div></div>
+        <div class="screen-body">
+          <div class="survey-progress">
+            <div class="progress-pip done"></div>
+            <div class="progress-pip done"></div>
+            <div class="progress-pip done"></div>
+            <div class="progress-pip done"></div>
+            <div class="progress-pip active"></div>
+            <div class="progress-pip"></div>
+          </div>
+          <div class="survey-label">Question 5 of 6</div>
+          <div class="survey-q">When do you listen best?</div>
+          <div class="survey-options">
+            <div class="survey-option selected">
+              <div class="survey-radio checked"></div>Right when I wake up
+            </div>
+            <div class="survey-option">
+              <div class="survey-radio"></div>Morning shower or coffee
+            </div>
+            <div class="survey-option">
+              <div class="survey-radio"></div>On my commute
+            </div>
+            <div class="survey-option">
+              <div class="survey-radio"></div>At my desk before work
+            </div>
+            <div class="survey-option">
+              <div class="survey-radio"></div>At the gym
+            </div>
+            <div class="survey-option">
+              <div class="survey-radio"></div>Whenever I get a spare moment
+            </div>
+          </div>
+          <button class="btn btn-gold" style="width:100%;margin-top:4px;">Continue</button>
+        </div>
+      </div>
+    </div>
+    <div class="screen-label"><strong>Screen 4.5</strong>Listening Habits</div>
+  </div>
+
+  <!-- Screen 4.6 Time -->
+  <div>
+    <div class="phone">
+      <div class="screen s-survey">
+        <div class="status-bar">9:41<div class="status-icons"><div class="status-icon"></div><div class="status-icon"></div></div></div>
+        <div class="screen-body">
+          <div class="survey-progress">
+            <div class="progress-pip done"></div>
+            <div class="progress-pip done"></div>
+            <div class="progress-pip done"></div>
+            <div class="progress-pip done"></div>
+            <div class="progress-pip done"></div>
+            <div class="progress-pip active"></div>
+          </div>
+          <div class="survey-label">Question 6 of 6</div>
+          <div class="survey-q">Which channels do you want each morning?</div>
+          <div class="survey-options">
+            <div class="survey-option selected">
+              <div class="survey-check checked">✓</div>
+              <div style="flex:1">Daily Wrap <span style="color:var(--gold);font-size:0.65rem;margin-left:4px;">7 min · Free</span></div>
+            </div>
+            <div class="survey-option selected">
+              <div class="survey-check checked">✓</div>
+              <div style="flex:1">NZ Markets <span style="color:rgba(255,255,255,0.3);font-size:0.65rem;margin-left:4px;">5 min</span></div>
+            </div>
+            <div class="survey-option selected">
+              <div class="survey-check checked">✓</div>
+              <div style="flex:1">Global Markets <span style="color:rgba(255,255,255,0.3);font-size:0.65rem;margin-left:4px;">4 min</span></div>
+            </div>
+            <div class="survey-option">
+              <div class="survey-check"></div>
+              <div style="flex:1">Trans-Tasman <span style="color:rgba(255,255,255,0.3);font-size:0.65rem;margin-left:4px;">3 min</span></div>
+            </div>
+            <div class="survey-option">
+              <div class="survey-check"></div>
+              <div style="flex:1">Macro & RBNZ <span style="color:rgba(255,255,255,0.3);font-size:0.65rem;margin-left:4px;">1–4 min</span></div>
+            </div>
+          </div>
+          <button class="btn btn-gold" style="width:100%;margin-top:4px;">Continue</button>
+        </div>
+      </div>
+    </div>
+    <div class="screen-label"><strong>Screen 4.6</strong>Time Commitment</div>
+  </div>
+
+</div>
+
+<!-- ============= SECTION 5: BRAND ============= -->
+<div class="section-label"><span>Section 5</span> — Brand Screen</div>
+<div class="screens-row">
+
+  <!-- Screen 5.1 -->
+  <div>
+    <div class="phone">
+      <div class="screen s-brand">
+        <div class="status-bar">9:41<div class="status-icons"><div class="status-icon"></div><div class="status-icon"></div></div></div>
+        <div class="screen-body">
+          <div class="brand-logo-ring">
+            <div class="brand-logo-inner">Bdx</div>
+          </div>
+          <div>
+            <div class="brand-headline">Built for New Zealanders.</div>
+          </div>
+          <div class="brand-body">The daily audio briefing this country needed. Made in Auckland. Sourced from primary material. Reviewed by a professional editor. Designed for the morning routine, not the podcast queue.</div>
+          <div class="brand-tags">
+            <div class="brand-tag">NZ-first</div>
+            <div class="brand-tag">Primary sources</div>
+            <div class="brand-tag">Editor reviewed</div>
+            <div class="brand-tag">7:30am daily</div>
+          </div>
+          <button class="btn btn-gold" style="width:100%">Let's get started</button>
+        </div>
+      </div>
+    </div>
+    <div class="screen-label"><strong>Screen 5.1</strong>The Briefdex Promise</div>
+  </div>
+
+</div>
+
+<!-- ============= SECTION 6: LOADING ============= -->
+<div class="section-label"><span>Section 6</span> — Loading / Manufactured Personalisation</div>
+<div class="screens-row">
+
+  <!-- Screen 6.1 -->
+  <div>
+    <div class="phone">
+      <div class="screen s-loading">
+        <div class="status-bar">9:41<div class="status-icons"><div class="status-icon"></div><div class="status-icon"></div></div></div>
+        <div class="screen-body">
+          <div class="loading-title">Analysing your responses...</div>
+          <div style="width:100%">
+            <div class="loading-bar-track">
+              <div class="loading-bar-fill" style="width: 72%;"></div>
+            </div>
+          </div>
+          <div class="loading-status">Setting up your channels...</div>
+          <div class="loading-steps">
+            <div class="loading-step done">
+              <div class="step-icon done">✓</div>
+              Analysing your responses
+            </div>
+            <div class="loading-step done">
+              <div class="step-icon done">✓</div>
+              Confirming your delivery time
+            </div>
+            <div class="loading-step active">
+              <div class="step-icon active">▶</div>
+              Setting up your channels
+            </div>
+            <div class="loading-step pending">
+              <div class="step-icon pending">·</div>
+              Configuring your smart alarm
+            </div>
+            <div class="loading-step pending">
+              <div class="step-icon pending">·</div>
+              Preparing today's briefing
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="screen-label"><strong>Screen 6.1</strong>Loading / Personalisation</div>
+  </div>
+
+</div>
+
+<!-- ============= SECTION 7: HARD PAYWALL ============= -->
+<div class="section-label"><span>Section 7</span> — Hard Paywall · No escape route</div>
+<div class="screens-row">
+
+  <!-- Screen 7.1 -->
+  <div>
+    <div class="phone">
+      <div class="screen s-paywall">
+        <div class="status-bar">9:41<div class="status-icons"><div class="status-icon"></div><div class="status-icon"></div></div></div>
+        <div class="screen-body">
+          <div class="paywall-headline">Your Daily Wrap and all channels are ready, Patrick.</div>
+          <div class="paywall-sub">Unlock everything with 7 days free.</div>
+          <div class="trust-row">
+            <div class="trust-pill"><span>🔒</span>No charges<br>until day 7</div>
+            <div class="trust-pill"><span>✕</span>Cancel in<br>2 taps</div>
+            <div class="trust-pill"><span>🔔</span>Reminder<br>2 days before</div>
+          </div>
+          <button class="btn btn-gold" style="width:100%; padding: 16px; font-size:0.95rem; border-radius:14px; box-shadow: 0 4px 24px rgba(201,168,76,0.25);">Start 7-day free trial</button>
+          <div style="text-align:center;">
+            <div style="font-size:0.7rem; color:rgba(255,255,255,0.35); margin-bottom:2px;">then $14.99 NZD / month</div>
+            <div style="font-size:0.62rem; color:var(--gold2);">or save 33% — $119.99/year</div>
+          </div>
+          <div class="paywall-no-escape">
+            <div class="no-escape-icon">⚠</div>
+            <div class="no-escape-text">No close button · No skip option · The only way forward is to start your trial.</div>
+          </div>
+          <div class="legal-text">By starting your trial, you agree to our Terms and Privacy Policy. We'll send a reminder before your trial ends.</div>
+        </div>
+      </div>
+    </div>
+    <div class="screen-label"><strong>Screen 7.1</strong>Hard Paywall — No Escape</div>
+  </div>
+
+</div>
+
+<!-- ============= SECTION 8: FIRST USE ============= -->
+<div class="section-label"><span>Section 8</span> — Post-Conversion · First Listen</div>
+<div class="screens-row">
+
+  <!-- Screen 8.1 -->
+  <div>
+    <div class="phone">
+      <div class="screen s-firstuse">
+        <div class="status-bar">9:41<div class="status-icons"><div class="status-icon"></div><div class="status-icon"></div></div></div>
+        <div class="screen-body">
+          <div style="text-align:left; width:100%;">
+            <div style="font-size:0.58rem; color:var(--g500); font-weight:600; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:4px;">Welcome</div>
+          </div>
+          <div class="firstuse-headline" style="text-align:left; width:100%;">Welcome to Briefdex.</div>
+          <div class="firstuse-sub" style="text-align:left;">Today's Daily Wrap is ready. Tap below to listen.</div>
+          <div class="episode-card">
+            <div class="episode-type">Daily Wrap · Today</div>
+            <div class="episode-title">Friday 8 May 2026</div>
+            <div class="episode-meta">7 min · NZX · RBNZ · Global Markets</div>
+            <div class="progress-bar"><div class="progress-fill"></div></div>
+          </div>
+          <div class="play-btn-large">
+            <div class="play-triangle"></div>
+          </div>
+          <div class="firstuse-tip">Tomorrow at 7am, today's briefing will be waiting on your lock screen.</div>
+        </div>
+      </div>
+    </div>
+    <div class="screen-label"><strong>Screen 8.1</strong>First Listen — Audio plays within 10 seconds</div>
+  </div>
+
+</div>
+
+<div style="text-align:center; margin-top: 80px; color: rgba(255,255,255,0.15); font-size:0.75rem; font-weight:300;">
+  Briefdex Onboarding Flow · 16 screens · Mid-fidelity · May 2026<br>
+  briefdex.co.nz · patrickjlong4@gmail.com
+</div>
+
+</body>
+</html>

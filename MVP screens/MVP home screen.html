@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Briefdex — Home Screen</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --g950: #050d08;
+  --g900: #0a1a10;
+  --g850: #132418;
+  --g800: #1a3a28;
+  --g700: #1e4a2f;
+  --g600: #2d6a42;
+  --g500: #3d8a55;
+  --g200: #a8d4b4;
+  --g100: #d4e8d8;
+  --gold: #c9a84c;
+  --gold-light: #d4b86a;
+  --gold-soft: #e8d4a0;
+  --cream: #f5edd8;
+  --white: #ffffff;
+  --text-dim: rgba(255,255,255,0.5);
+  --text-faint: rgba(255,255,255,0.3);
+  --line: rgba(255,255,255,0.08);
+}
+
+body {
+  background: #0a0a0a;
+  font-family: 'DM Sans', sans-serif;
+  padding: 56px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  min-height: 100vh;
+}
+
+.page-title {
+  text-align: center;
+  margin-bottom: 16px;
+}
+.page-title h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+.page-title p {
+  color: rgba(255,255,255,0.4);
+  font-size: 0.8rem;
+  font-weight: 300;
+}
+
+/* PHONE FRAME */
+.phone {
+  width: 380px;
+  height: 800px;
+  background: var(--g950);
+  border-radius: 52px;
+  border: 2px solid rgba(255,255,255,0.1);
+  box-shadow:
+    0 0 0 8px #1a1a1a,
+    0 0 0 10px rgba(255,255,255,0.04),
+    0 40px 80px rgba(0,0,0,0.7);
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.phone::before {
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 110px;
+  height: 32px;
+  background: #050505;
+  border-radius: 24px;
+  z-index: 50;
+}
+
+.screen {
+  position: absolute;
+  inset: 0;
+  border-radius: 52px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--g900);
+  background-image:
+    radial-gradient(ellipse 70% 40% at 50% 0%, rgba(201,168,76,0.08) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 30% at 80% 90%, rgba(61,138,85,0.05) 0%, transparent 60%);
+}
+
+/* STATUS BAR */
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 56px 28px 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.75);
+  font-family: 'DM Mono', monospace;
+  flex-shrink: 0;
+  z-index: 10;
+  position: relative;
+}
+.status-icons {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+.signal-dots {
+  display: flex;
+  gap: 2px;
+  align-items: end;
+}
+.signal-dots div {
+  width: 3px;
+  background: rgba(255,255,255,0.75);
+  border-radius: 1px;
+}
+.signal-dots div:nth-child(1) { height: 4px; }
+.signal-dots div:nth-child(2) { height: 6px; }
+.signal-dots div:nth-child(3) { height: 8px; }
+.signal-dots div:nth-child(4) { height: 10px; }
+.battery {
+  width: 22px;
+  height: 11px;
+  border: 1.2px solid rgba(255,255,255,0.6);
+  border-radius: 3px;
+  position: relative;
+  padding: 1.5px;
+}
+.battery::after {
+  content: '';
+  position: absolute;
+  right: -3px;
+  top: 3px;
+  width: 2px;
+  height: 4px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 0 1px 1px 0;
+}
+.battery-fill {
+  width: 75%;
+  height: 100%;
+  background: rgba(255,255,255,0.85);
+  border-radius: 1px;
+}
+.wifi-icon {
+  width: 14px;
+  height: 10px;
+  position: relative;
+}
+.wifi-icon::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.75);
+  clip-path: polygon(50% 0%, 100% 60%, 80% 60%, 80% 100%, 20% 100%, 20% 60%, 0% 60%);
+}
+
+/* SCREEN CONTENT */
+.screen-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 28px 24px 110px;
+  scroll-behavior: smooth;
+}
+.screen-content::-webkit-scrollbar { display: none; }
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 28px;
+}
+.greeting-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.greeting-eyebrow {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.greeting {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.15;
+}
+.date-line {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  font-weight: 400;
+  margin-top: 4px;
+  letter-spacing: 0.02em;
+}
+
+/* DAILY WRAP HERO */
+.hero-wrap {
+  position: relative;
+  margin-bottom: 32px;
+  border-radius: 22px;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--g800) 0%, var(--g700) 50%, var(--g850) 100%);
+  border: 1px solid rgba(201,168,76,0.25);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(201,168,76,0.05);
+}
+
+.hero-wrap::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(201,168,76,0.18) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero-wrap::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.2));
+  pointer-events: none;
+}
+
+.hero-top {
+  padding: 22px 22px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(201,168,76,0.18);
+  border: 1px solid rgba(201,168,76,0.4);
+  border-radius: 20px;
+  padding: 4px 11px 4px 9px;
+  font-size: 0.62rem;
+  color: var(--gold-light);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.hero-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 8px var(--gold);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.hero-duration {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.5);
+  font-weight: 500;
+}
+
+.hero-main {
+  padding: 18px 22px 22px;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-eyebrow {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.78rem;
+  color: var(--gold-light);
+  font-style: italic;
+  margin-bottom: 6px;
+  font-weight: 400;
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.hero-desc {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.6);
+  font-weight: 300;
+  line-height: 1.55;
+  margin-bottom: 20px;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.play-btn {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 24px rgba(201,168,76,0.45), 0 0 0 6px rgba(201,168,76,0.1);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform 0.15s ease;
+}
+.play-btn:hover { transform: scale(1.05); }
+
+.play-triangle {
+  width: 0;
+  height: 0;
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
+  border-left: 14px solid var(--g900);
+  margin-left: 3px;
+}
+
+.hero-action-text {
+  flex: 1;
+}
+.hero-cta-label {
+  font-size: 0.85rem;
+  color: var(--white);
+  font-weight: 600;
+}
+.hero-cta-sub {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.45);
+  font-weight: 300;
+  margin-top: 2px;
+}
+
+/* HERO PROGRESS BAR */
+.hero-progress {
+  margin-top: 18px;
+  position: relative;
+  z-index: 2;
+}
+.hero-progress-track {
+  width: 100%;
+  height: 3px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+.hero-progress-fill {
+  height: 100%;
+  width: 32%;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  border-radius: 3px;
+  box-shadow: 0 0 12px rgba(201,168,76,0.4);
+  position: relative;
+}
+.hero-progress-fill::after {
+  content: '';
+  position: absolute;
+  right: -3px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background: var(--gold);
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(201,168,76,0.2), 0 0 12px rgba(201,168,76,0.6);
+}
+.hero-progress-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.5);
+  font-weight: 500;
+}
+.hero-progress-status {
+  color: var(--gold-light);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.58rem;
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* SECTION HEADERS */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.section-link {
+  font-size: 0.68rem;
+  color: var(--gold);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+/* CHANNEL TILES */
+.channels-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.channel-tile {
+  position: relative;
+  border-radius: 16px;
+  padding: 16px;
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.channel-tile:hover {
+  transform: translateY(-2px);
+  border-color: rgba(201,168,76,0.4);
+}
+
+.channel-tile::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.92;
+  z-index: 0;
+}
+
+.channel-tile > * { position: relative; z-index: 1; }
+
+.channel-tile-nzm::before {
+  background:
+    radial-gradient(ellipse at top right, rgba(201,168,76,0.25), transparent 60%),
+    linear-gradient(135deg, #163524 0%, #0d2618 100%);
+}
+.channel-tile-macro::before {
+  background:
+    radial-gradient(ellipse at bottom left, rgba(61,138,85,0.3), transparent 65%),
+    linear-gradient(135deg, #0d2618 0%, #163524 100%);
+}
+.channel-tile-global::before {
+  background:
+    radial-gradient(ellipse at top left, rgba(168,212,180,0.15), transparent 60%),
+    linear-gradient(135deg, #1a3a28 0%, #0a1a10 100%);
+}
+.channel-tile-tt::before {
+  background:
+    radial-gradient(ellipse at bottom right, rgba(201,168,76,0.18), transparent 65%),
+    linear-gradient(135deg, #0a1a10 0%, #1e4a2f 100%);
+}
+
+.channel-tile-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.channel-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: rgba(201,168,76,0.18);
+  border: 1px solid rgba(201,168,76,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  color: var(--gold-light);
+  font-weight: 700;
+}
+
+.channel-duration {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  color: rgba(255,255,255,0.5);
+  font-weight: 500;
+  background: rgba(0,0,0,0.3);
+  padding: 3px 7px;
+  border-radius: 8px;
+}
+
+.channel-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.channel-eyebrow {
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(201,168,76,0.6);
+  font-weight: 600;
+}
+.channel-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.2;
+}
+.channel-desc {
+  font-size: 0.62rem;
+  color: rgba(255,255,255,0.4);
+  font-weight: 300;
+  line-height: 1.45;
+}
+
+/* CHANNEL TILE PROGRESS */
+.channel-progress {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.channel-progress-track {
+  flex: 1;
+  height: 2px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.channel-progress-fill {
+  height: 100%;
+  background: var(--gold);
+  border-radius: 2px;
+  box-shadow: 0 0 6px rgba(201,168,76,0.4);
+}
+.channel-progress-fill.unplayed {
+  background: rgba(255,255,255,0.15);
+  box-shadow: none;
+}
+.channel-progress-status {
+  font-size: 0.55rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: rgba(255,255,255,0.5);
+  white-space: nowrap;
+}
+.channel-progress-status.done {
+  color: var(--g200);
+}
+.channel-progress-status.partial {
+  color: var(--gold-light);
+}
+
+/* TRUST FOOTER */
+.trust-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 0 8px;
+  margin-top: 8px;
+  border-top: 1px solid var(--line);
+}
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.6rem;
+  color: rgba(255,255,255,0.35);
+  font-weight: 400;
+}
+.trust-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+/* BOTTOM NAV */
+.bottom-nav {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 14px 32px 26px;
+  background: rgba(5,13,8,0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 40;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 14px;
+  cursor: pointer;
+  flex: 1;
+  transition: opacity 0.2s ease;
+}
+.nav-item.inactive { opacity: 0.55; }
+.nav-item:hover { opacity: 1; }
+
+.nav-icon {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.85);
+}
+.nav-item.active .nav-icon { color: var(--gold); }
+
+.nav-label {
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: rgba(255,255,255,0.6);
+}
+.nav-item.active .nav-label { color: var(--gold); }
+
+/* NOW PLAYING (centre) */
+.nav-nowplaying {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -28px;
+  box-shadow: 0 6px 20px rgba(201,168,76,0.4), 0 0 0 4px var(--g900);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+.nav-nowplaying:hover { transform: scale(1.05); }
+.nav-nowplaying::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(201,168,76,0.3);
+  animation: ring-pulse 2.5s ease-in-out infinite;
+}
+@keyframes ring-pulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.08); }
+}
+
+.now-playing-icon {
+  display: flex;
+  gap: 2.5px;
+  align-items: end;
+  height: 18px;
+}
+.now-playing-icon div {
+  width: 3px;
+  background: var(--g900);
+  border-radius: 2px;
+  animation: bars 1.2s ease-in-out infinite;
+}
+.now-playing-icon div:nth-child(1) { height: 60%; animation-delay: 0s; }
+.now-playing-icon div:nth-child(2) { height: 100%; animation-delay: 0.2s; }
+.now-playing-icon div:nth-child(3) { height: 70%; animation-delay: 0.4s; }
+.now-playing-icon div:nth-child(4) { height: 90%; animation-delay: 0.1s; }
+@keyframes bars {
+  0%, 100% { transform: scaleY(0.6); }
+  50% { transform: scaleY(1); }
+}
+
+.nav-label-center {
+  position: absolute;
+  bottom: -2px;
+  font-size: 0.55rem;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.04em;
+}
+
+/* SVG icon styles */
+svg { display: block; }
+
+/* DOWN-PAGE PADDING for last channel tiles */
+.channels-grid:last-of-type { margin-bottom: 16px; }
+
+/* Footer note below phone */
+.footer-note {
+  text-align: center;
+  margin-top: 24px;
+  color: rgba(255,255,255,0.2);
+  font-size: 0.7rem;
+  font-weight: 300;
+  font-style: italic;
+}
+</style>
+</head>
+<body>
+
+<div class="page-title">
+  <h1>Briefdex — MVP Home Screen</h1>
+  <p>Clean. Trustworthy. Daily Wrap front and centre.</p>
+</div>
+
+<div class="phone">
+  <div class="screen">
+
+    <!-- Status Bar -->
+    <div class="status-bar">
+      <span>7:42</span>
+      <div class="status-icons">
+        <div class="signal-dots"><div></div><div></div><div></div><div></div></div>
+        <div class="wifi-icon"></div>
+        <div class="battery"><div class="battery-fill"></div></div>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="screen-content">
+
+      <!-- Header -->
+      <div class="header">
+        <div class="greeting-wrap">
+          <div class="greeting-eyebrow">Good morning <span style="font-size:0.85rem;">👋</span></div>
+          <div class="greeting">Patrick.</div>
+          <div class="date-line">Tuesday, 12 May 2026</div>
+        </div>
+      </div>
+
+      <!-- Daily Wrap Hero -->
+      <div class="hero-wrap">
+        <div class="hero-top">
+          <div class="hero-badge">Today's Briefing</div>
+          <div class="hero-duration">7 min</div>
+        </div>
+        <div class="hero-main">
+          <div class="hero-eyebrow">The Daily Wrap</div>
+          <div class="hero-title">Markets before<br>your first coffee.</div>
+          <div class="hero-desc">NZX, RBNZ, global markets, and what to watch today — sourced from primary material, ready before the open.</div>
+          <div class="hero-actions">
+            <button class="play-btn"><div class="play-triangle"></div></button>
+            <div class="hero-action-text">
+              <div class="hero-cta-label">Continue listening</div>
+              <div class="hero-cta-sub">NZX 13,271 · OCR 2.25% · Brent $100.06</div>
+            </div>
+          </div>
+          <div class="hero-progress">
+            <div class="hero-progress-track">
+              <div class="hero-progress-fill"></div>
+            </div>
+            <div class="hero-progress-meta">
+              <span class="hero-progress-status">▸ Now playing</span>
+              <span>2:14 / 7:00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Channels Section -->
+      <div class="section-header">
+        <div class="section-title">All channels</div>
+        <div class="section-link">5 daily</div>
+      </div>
+
+      <div class="channels-grid">
+
+        <!-- NZ Markets -->
+        <div class="channel-tile channel-tile-nzm">
+          <div class="channel-tile-top">
+            <div class="channel-icon">N</div>
+            <div class="channel-duration">5 min</div>
+          </div>
+          <div class="channel-meta">
+            <div class="channel-eyebrow">Local</div>
+            <div class="channel-name">NZ Markets</div>
+            <div class="channel-desc">NZX moves, earnings, sectors</div>
+          </div>
+          <div class="channel-progress">
+            <div class="channel-progress-track">
+              <div class="channel-progress-fill" style="width: 68%;"></div>
+            </div>
+            <div class="channel-progress-status partial">2m left</div>
+          </div>
+        </div>
+
+        <!-- Macro & RBNZ -->
+        <div class="channel-tile channel-tile-macro">
+          <div class="channel-tile-top">
+            <div class="channel-icon">M</div>
+            <div class="channel-duration">1–4 min</div>
+          </div>
+          <div class="channel-meta">
+            <div class="channel-eyebrow">Policy</div>
+            <div class="channel-name">Macro & RBNZ</div>
+            <div class="channel-desc">OCR, inflation, Stats NZ data</div>
+          </div>
+          <div class="channel-progress">
+            <div class="channel-progress-track">
+              <div class="channel-progress-fill" style="width: 100%;"></div>
+            </div>
+            <div class="channel-progress-status done">✓ Done</div>
+          </div>
+        </div>
+
+        <!-- Global Markets -->
+        <div class="channel-tile channel-tile-global">
+          <div class="channel-tile-top">
+            <div class="channel-icon">G</div>
+            <div class="channel-duration">4 min</div>
+          </div>
+          <div class="channel-meta">
+            <div class="channel-eyebrow">Global</div>
+            <div class="channel-name">Global Markets</div>
+            <div class="channel-desc">Wall Street, oil, gold, FX</div>
+          </div>
+          <div class="channel-progress">
+            <div class="channel-progress-track">
+              <div class="channel-progress-fill unplayed" style="width: 0%;"></div>
+            </div>
+            <div class="channel-progress-status">New</div>
+          </div>
+        </div>
+
+        <!-- Trans-Tasman -->
+        <div class="channel-tile channel-tile-tt">
+          <div class="channel-tile-top">
+            <div class="channel-icon">T</div>
+            <div class="channel-duration">3 min</div>
+          </div>
+          <div class="channel-meta">
+            <div class="channel-eyebrow">Regional</div>
+            <div class="channel-name">Trans-Tasman</div>
+            <div class="channel-desc">ASX, RBA, AU economic data</div>
+          </div>
+          <div class="channel-progress">
+            <div class="channel-progress-track">
+              <div class="channel-progress-fill unplayed" style="width: 0%;"></div>
+            </div>
+            <div class="channel-progress-status">New</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Trust footer -->
+      <div class="trust-row">
+        <div class="trust-item"><div class="trust-dot"></div>Primary sources</div>
+        <div class="trust-item"><div class="trust-dot"></div>Editor reviewed</div>
+        <div class="trust-item"><div class="trust-dot"></div>NZ-first</div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Nav -->
+    <div class="bottom-nav">
+
+      <!-- Home (active) -->
+      <div class="nav-item active">
+        <div class="nav-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 12L12 3L21 12V20C21 20.5523 20.5523 21 20 21H15V14H9V21H4C3.44772 21 3 20.5523 3 20V12Z" fill="currentColor" fill-opacity="0.15"/>
+          </svg>
+        </div>
+        <div class="nav-label">Home</div>
+      </div>
+
+      <!-- Now Playing (centre, raised) -->
+      <div class="nav-nowplaying">
+        <div class="now-playing-icon"><div></div><div></div><div></div><div></div></div>
+      </div>
+
+      <!-- Profile -->
+      <div class="nav-item inactive">
+        <div class="nav-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="8" r="4"/>
+            <path d="M4 21C4 16.5817 7.58172 13 12 13C16.4183 13 20 16.5817 20 21"/>
+          </svg>
+        </div>
+        <div class="nav-label">Profile</div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="footer-note">MVP scope · Home + Now Playing + Profile only · Briefdex May 2026</div>
+
+</body>
+</html>

@@ -790,12 +790,15 @@
 
 <!-- NAV -->
 <nav>
-  <a href="#home" class="nav-logo">Briefdex</a>
+  <a href="#home" class="nav-logo" style="display:flex; align-items:center; gap:0.6rem;">
+    <img src="BDX.png" alt="Briefdex" style="width:32px; height:32px; border-radius:6px;">
+    Briefdex
+  </a>
   <ul class="nav-links">
     <li><a href="#how-it-works">How it works</a></li>
     <li><a href="#pricing">Pricing</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#waitlist" class="nav-cta">Join waitlist</a></li>
+    <li><a href="https://apps.apple.com/nz/app/briefdex/id6773272490" class="nav-cta" target="_blank">Download on App Store</a></li>
   </ul>
 </nav>
 
@@ -805,7 +808,7 @@
   <h1 class="hero-headline">Markets before your <span class="gold">first coffee.</span></h1>
   <p class="hero-sub">Five short audio briefings. Every weekday morning. Built entirely from primary sources — NZX announcements, RBNZ releases, Stats NZ data. NZ-first, always.</p>
   <div class="hero-actions">
-    <a href="#waitlist" class="btn-primary">Join the waitlist</a>
+    <a href="https://apps.apple.com/nz/app/briefdex/id6773272490" class="btn-primary" target="_blank">⬇ Download on the App Store</a>
     <a href="#how-it-works" class="btn-ghost">How it works</a>
   </div>
 
@@ -835,8 +838,8 @@
 <!-- PROOF BAR -->
 <div class="proof-bar">
   <div class="proof-item"><span class="proof-dot"></span>Primary sources only — NZX, RBNZ, Stats NZ</div>
-  <div class="proof-item"><span class="proof-dot"></span>Seven minutes. Every weekday. 7:30am.</div>
-  <div class="proof-item"><span class="proof-dot"></span>No app required at launch</div>
+  <div class="proof-item"><span class="proof-dot"></span>Five channels. Every weekday. 6:30am.</div>
+  <div class="proof-item"><span class="proof-dot"></span>Available now on the App Store</div>
   <div class="proof-item"><span class="proof-dot"></span>Built for the NZ investor</div>
 </div>
 
@@ -845,15 +848,15 @@
   <div class="section-header fade-up">
     <div class="section-label">The product</div>
     <h2 class="section-title">Five channels. One morning routine.</h2>
-    <p class="section-body">Briefdex delivers five daily audio briefings covering everything that moves New Zealand markets. Free for the Daily Wrap. Premium for the deep dives.</p>
+    <p class="section-body">Briefdex delivers five daily audio briefings covering everything that moves New Zealand markets. All channels included with your Premium subscription.</p>
   </div>
 
   <div class="channels-grid">
     <div class="channel-card featured fade-up">
-      <div class="channel-tag">Free</div>
+      <div class="channel-tag">Premium</div>
       <div class="channel-name">Daily Wrap</div>
       <div class="channel-desc">Seven minutes. Every weekday. The complete picture — NZX, RBNZ, global markets, macro, and what to watch today.</div>
-      <div class="channel-meta">7 min &nbsp;·&nbsp; Every weekday &nbsp;·&nbsp; Free forever</div>
+      <div class="channel-meta">7 min &nbsp;·&nbsp; Every weekday</div>
     </div>
     <div class="channel-card fade-up">
       <div class="channel-tag">Premium</div>
@@ -865,7 +868,7 @@
       <div class="channel-tag">Premium</div>
       <div class="channel-name">Macro & RBNZ</div>
       <div class="channel-desc">OCR decisions, RBNZ communications, Stats NZ releases, and what they mean for your portfolio.</div>
-      <div class="channel-meta">1–4 min &nbsp;·&nbsp; Mon / Wed / Fri + event-triggered</div>
+      <div class="channel-meta">1–4 min &nbsp;·&nbsp; Every weekday</div>
     </div>
     <div class="channel-card fade-up">
       <div class="channel-tag">Premium</div>
@@ -894,7 +897,7 @@
     </div>
     <div class="step fade-up">
       <div class="step-num">03</div>
-      <div class="step-title">Audio delivered by 7:30am</div>
+      <div class="step-title">Audio delivered by 6:30am</div>
       <div class="step-body">Your briefing is ready before the market opens. Listen on your commute, your walk, or at your desk.</div>
     </div>
     <div class="step fade-up">
@@ -910,28 +913,15 @@
   <div class="section-header fade-up">
     <div class="section-label" style="color: var(--gold-400);">Pricing</div>
     <h2 class="section-title">Simple. No surprises.</h2>
-    <p class="section-body">Start free. Upgrade when you're ready. Cancel any time.</p>
+    <p class="section-body">Start with a 7-day free trial. Cancel any time.</p>
   </div>
 
   <div class="pricing-grid">
-    <div class="pricing-card fade-up">
-      <div class="pricing-name">Free</div>
-      <div class="pricing-amount">$0 <span>/ month</span></div>
-      <div class="pricing-period">No credit card required</div>
-      <ul class="pricing-features">
-        <li class="included">Daily Wrap — 7 minutes, every weekday</li>
-        <li>NZ Markets channel</li>
-        <li>Macro & RBNZ channel</li>
-        <li>Global Markets channel</li>
-        <li>Trans-Tasman channel</li>
-      </ul>
-      <a href="#waitlist" class="btn-ghost" style="width: 100%; justify-content: center;">Join waitlist</a>
-    </div>
     <div class="pricing-card recommended fade-up">
-      <div class="pricing-badge">Most popular</div>
+      <div class="pricing-badge">7-day free trial</div>
       <div class="pricing-name">Premium</div>
-      <div class="pricing-amount">$14.99 <span>/ month</span></div>
-      <div class="pricing-period">Or $119.99 per year — save two months</div>
+      <div class="pricing-amount">$19.99 <span>/ month NZD</span></div>
+      <div class="pricing-period">After your free trial. Cancel any time.</div>
       <ul class="pricing-features">
         <li class="included">Daily Wrap — 7 minutes, every weekday</li>
         <li class="included">NZ Markets channel</li>
@@ -939,28 +929,33 @@
         <li class="included">Global Markets channel</li>
         <li class="included">Trans-Tasman channel</li>
       </ul>
-      <a href="#waitlist" class="btn-primary" style="width: 100%; justify-content: center;">Start 7-day free trial</a>
+      <a href="https://apps.apple.com/nz/app/briefdex/id6773272490" class="btn-primary" style="width: 100%; justify-content: center;" target="_blank">Download on the App Store</a>
+    </div>
+    <div class="pricing-card fade-up" style="display:flex; flex-direction:column; justify-content:center;">
+      <div class="pricing-badge">Corporate</div>
+      <div class="pricing-name">Teams & Organisations</div>
+      <div class="pricing-amount" style="font-size:2rem;">Custom</div>
+      <div class="pricing-period" style="margin-bottom:1.5rem;">Invoiced directly. No App Store fees.</div>
+      <p style="font-size:0.875rem; color:rgba(255,255,255,0.5); font-weight:300; line-height:1.6; margin-bottom:2rem;">Ideal for banks, advisory firms, and fund managers. Seat-based pricing, direct invoicing, and onboarding support.</p>
+      <a href="mailto:hello@briefdex.com?subject=Corporate enquiry" class="btn-ghost" style="width: 100%; justify-content: center;">Get in touch</a>
     </div>
   </div>
 </section>
 
-<!-- WAITLIST -->
-<div class="waitlist-section" id="waitlist">
-  <h2 class="waitlist-title">Be first when <span class="gold">Briefdex launches.</span></h2>
-  <p class="waitlist-sub">Join the waitlist and get early access, plus a free extended trial when we open the doors.</p>
-  <form class="waitlist-form" onsubmit="handleWaitlist(event)">
-    <input type="email" class="waitlist-input" placeholder="Your email address" required id="waitlist-email">
-    <button type="submit" class="btn-primary">Join waitlist</button>
-  </form>
-  <p class="waitlist-note">No spam. Just a note when we launch.</p>
+<!-- APP STORE CTA -->
+<div class="waitlist-section" id="download">
+  <h2 class="waitlist-title">Ready to brief up? <span class="gold">Download Briefdex.</span></h2>
+  <p class="waitlist-sub">Available now on the App Store. Start your 7-day free trial today — no commitment required.</p>
+  <a href="https://apps.apple.com/nz/app/briefdex/id6773272490" class="btn-primary" target="_blank" style="font-size:1rem; padding: 1rem 2.5rem;">⬇ Download on the App Store</a>
+  <p class="waitlist-note">iOS only · $19.99 NZD/month after free trial · Cancel any time</p>
 </div>
 
 <!-- CONTACT -->
 <section id="contact">
   <div class="section-header fade-up">
     <div class="section-label">Get in touch</div>
-    <h2 class="section-title">Talk to the founder.</h2>
-    <p class="section-body">Whether you're interested in beta access, a partnership, or just want to know more — reach out directly.</p>
+    <h2 class="section-title">Talk to us.</h2>
+    <p class="section-body">Whether you're interested in a corporate deal, a partnership, or have a general enquiry — reach out directly.</p>
   </div>
 
   <div class="contact-grid">
@@ -970,20 +965,24 @@
         <div class="contact-detail-value">Patrick Long</div>
       </div>
       <div class="contact-detail">
-        <div class="contact-detail-label">Email</div>
-        <div class="contact-detail-value">patrickjlong4@gmail.com</div>
+        <div class="contact-detail-label">Founder enquiries</div>
+        <div class="contact-detail-value"><a href="mailto:patrick@briefdex.com" style="color:var(--green-900); text-decoration:none; border-bottom: 1px solid var(--gold-500);">patrick@briefdex.com</a></div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-label">General & corporate enquiries</div>
+        <div class="contact-detail-value"><a href="mailto:hello@briefdex.com" style="color:var(--green-900); text-decoration:none; border-bottom: 1px solid var(--gold-500);">hello@briefdex.com</a></div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-label">Privacy</div>
+        <div class="contact-detail-value"><a href="mailto:privacy@briefdex.com" style="color:var(--green-900); text-decoration:none; border-bottom: 1px solid var(--gold-500);">privacy@briefdex.com</a></div>
       </div>
       <div class="contact-detail">
         <div class="contact-detail-label">Based in</div>
         <div class="contact-detail-value">Auckland, New Zealand</div>
       </div>
       <div class="contact-detail">
-        <div class="contact-detail-label">Launching</div>
-        <div class="contact-detail-value">Late 2026</div>
-      </div>
-      <div class="contact-detail">
-        <div class="contact-detail-label">Beta access</div>
-        <div class="contact-detail-value">Available now for a limited group of NZ finance professionals</div>
+        <div class="contact-detail-label">Status</div>
+        <div class="contact-detail-value">Now live on the App Store</div>
       </div>
     </div>
 
@@ -1003,14 +1002,19 @@
         <input type="email" class="form-input" placeholder="james@company.co.nz" required>
       </div>
       <div class="form-group">
-        <label class="form-label">I'm interested in</label>
+        <label class="form-label">I'm enquiring as</label>
         <select class="form-select">
           <option value="">Select one</option>
-          <option>Beta access</option>
+          <option>An individual subscriber</option>
+          <option>An organisation / corporate deal</option>
           <option>Partnership or collaboration</option>
           <option>Investment</option>
           <option>General enquiry</option>
         </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Organisation (if applicable)</label>
+        <input type="text" class="form-input" placeholder="e.g. ANZ, Jarden, Milford Asset Management">
       </div>
       <div class="form-group">
         <label class="form-label">Message</label>
@@ -1026,8 +1030,9 @@
   <div class="footer-logo">Briefdex</div>
   <p class="footer-copy">© 2026 Briefdex. Auckland, New Zealand.</p>
   <ul class="footer-links">
-    <li><a href="#">Privacy</a></li>
-    <li><a href="#">Terms</a></li>
+    <li><a href="/privacy-policy.html">Privacy Policy</a></li>
+    <li><a href="/terms-of-service.html">Terms of Service</a></li>
+    <li><a href="mailto:privacy@briefdex.com">privacy@briefdex.com</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </footer>
@@ -1042,18 +1047,6 @@
   }, { threshold: 0.1 });
 
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-
-  function handleWaitlist(e) {
-    e.preventDefault();
-    const btn = e.target.querySelector('button');
-    const input = document.getElementById('waitlist-email');
-    btn.textContent = "You're on the list";
-    btn.style.background = '#3d8a55';
-    input.value = '';
-    input.placeholder = 'Thank you — we will be in touch.';
-    input.disabled = true;
-    btn.disabled = true;
-  }
 
   function handleContact(e) {
     e.preventDefault();
