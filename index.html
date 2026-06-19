@@ -80,17 +80,6 @@
 
   .nav-links a:hover { color: var(--gold); }
 
-  .nav-cta {
-    background: var(--gold) !important;
-    color: var(--green) !important;
-    padding: 0.55rem 1.25rem;
-    border-radius: 6px;
-    font-weight: 600 !important;
-    transition: background 0.2s !important;
-  }
-
-  .nav-cta:hover { background: var(--gold-hover) !important; color: var(--white) !important; }
-
   /* BUTTONS */
   .btn-primary {
     display: inline-flex;
@@ -110,6 +99,24 @@
     font-family: inherit;
   }
   .btn-primary:hover { background: var(--gold-hover); color: var(--white); transform: translateY(-1px); }
+
+  /* Non-interactive gold pill — visually mirrors btn-primary but no
+     hover/transform/cursor, since it announces a future state rather
+     than triggering an action. */
+  .coming-soon-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gold);
+    color: var(--green);
+    padding: 0.95rem 2rem;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 1rem;
+    font-family: inherit;
+    cursor: default;
+    user-select: none;
+  }
 
   .btn-outline-light {
     display: inline-flex;
@@ -170,6 +177,21 @@
     gap: 1rem;
     flex-wrap: wrap;
   }
+
+  .hero-instagram {
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: rgba(255,255,255,0.7);
+    font-weight: 400;
+  }
+  .hero-instagram a {
+    color: var(--gold);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+  }
+  .hero-instagram a:hover { color: var(--gold-hover); text-decoration: underline; }
 
   /* STATS BAR */
   .stats-bar {
@@ -635,7 +657,6 @@
   @media (max-width: 768px) {
     nav { padding: 0.875rem 1.25rem; }
     .nav-links { gap: 1rem; }
-    .nav-links a:not(.nav-cta) { display: none; }
     #home { padding: 4rem 1.25rem 5rem; }
     .stats-bar { padding: 2.5rem 1.25rem; grid-template-columns: 1fr; gap: 2rem; }
     #channels, #how-it-works, #pricing, #contact { padding: 5rem 1.25rem; }
@@ -645,7 +666,7 @@
     footer { padding: 2.5rem 1.25rem 2rem; }
     .footer-bottom { flex-direction: column; align-items: flex-start; }
     .hero-actions { flex-direction: column; align-items: stretch; }
-    .hero-actions .btn-primary, .hero-actions .btn-outline-light { width: 100%; }
+    .hero-actions .btn-primary, .hero-actions .btn-outline-light, .hero-actions .coming-soon-pill { width: 100%; }
   }
 </style>
 </head>
@@ -660,7 +681,6 @@
     <li><a href="#how-it-works">How it works</a></li>
     <li><a href="#pricing">Pricing</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="https://apps.apple.com/nz/app/briefdex/id6773272490" class="nav-cta" target="_blank">Download on App Store</a></li>
   </ul>
 </nav>
 
@@ -670,9 +690,10 @@
   <h1 class="hero-headline">Markets before your first coffee.</h1>
   <p class="hero-sub">Five daily audio briefings covering everything that moved markets overnight — NZX, global markets, the OCR, and what it means for your money. Ready at 6:30am.</p>
   <div class="hero-actions">
-    <a href="https://apps.apple.com/nz/app/briefdex/id6773272490" class="btn-primary" target="_blank">Download on the App Store</a>
+    <span class="coming-soon-pill">Coming to the App Store soon</span>
     <a href="#how-it-works" class="btn-outline-light">How it works</a>
   </div>
+  <p class="hero-instagram">In the meantime, follow us on Instagram for daily finance content. <a href="https://www.instagram.com/briefdex" target="_blank" rel="noopener noreferrer">@briefdex</a></p>
 </section>
 
 <!-- STATS BAR -->
