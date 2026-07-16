@@ -199,36 +199,6 @@
   }
   .hero-instagram a:hover { color: var(--gold-hover); text-decoration: underline; }
 
-  /* STATS BAR */
-  .stats-bar {
-    background: var(--white);
-    padding: 3rem 4rem;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    border-bottom: 1px solid var(--card-border);
-  }
-
-  .stat {
-    text-align: center;
-  }
-
-  .stat-number {
-    font-size: clamp(2.25rem, 4.5vw, 3.5rem);
-    font-weight: 700;
-    color: var(--gold);
-    line-height: 1;
-    margin-bottom: 0.5rem;
-    letter-spacing: -0.02em;
-  }
-
-  .stat-label {
-    font-size: 0.9375rem;
-    color: var(--green);
-    font-weight: 500;
-    line-height: 1.4;
-  }
-
   /* SECTIONS */
   section { scroll-margin-top: 80px; }
 
@@ -350,6 +320,15 @@
     font-weight: 400;
   }
 
+  .how-fineprint {
+    margin-top: 3rem;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    color: var(--text-light);
+    font-style: italic;
+    font-weight: 400;
+  }
+
   /* PRICING */
   #pricing {
     padding: 7rem 4rem;
@@ -403,6 +382,18 @@
     font-size: 1rem;
     font-weight: 400;
     color: var(--text-light);
+  }
+
+  .pricing-annual {
+    font-size: 0.9375rem;
+    color: var(--text-mid);
+    margin-bottom: 0.75rem;
+    font-weight: 400;
+  }
+
+  .pricing-annual strong {
+    color: var(--green);
+    font-weight: 600;
   }
 
   .pricing-period {
@@ -664,7 +655,6 @@
     nav { padding: 0.875rem 1.25rem; }
     .nav-links { gap: 1rem; }
     #home { padding: 4rem 1.25rem 5rem; }
-    .stats-bar { padding: 2.5rem 1.25rem; grid-template-columns: 1fr; gap: 2rem; }
     #channels, #how-it-works, #pricing, #contact { padding: 5rem 1.25rem; }
     .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
     .form-row { grid-template-columns: 1fr; }
@@ -696,7 +686,7 @@
 <section id="home">
   <span class="hero-wordmark wordmark-light">brief<span class="dex">dex.</span></span>
   <h1 class="hero-headline">Markets before your first coffee.</h1>
-  <p class="hero-sub">Five daily audio briefings covering the NZX, Wall Street and the OCR — explained in plain English. Ready at 6:30am.</p>
+  <p class="hero-sub">A seven-minute audio briefing, every weekday at 6:30am. What the markets did overnight, what it means for your money, explained in plain English.</p>
   <div class="hero-actions">
     <a href="https://apps.apple.com/nz/app/briefdex/id6773272490" class="app-store-badge" target="_blank" rel="noopener noreferrer" aria-label="Download Briefdex on the App Store">
       <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store" width="180" height="60">
@@ -706,22 +696,6 @@
   <p class="hero-trial">Free 7-day trial. Then NZD $19.99/month.</p>
   <p class="hero-instagram">Follow us on Instagram for daily finance content. <a href="https://www.instagram.com/briefdex" target="_blank" rel="noopener noreferrer">@briefdex</a></p>
 </section>
-
-<!-- STATS BAR -->
-<div class="stats-bar">
-  <div class="stat">
-    <div class="stat-number">62%</div>
-    <div class="stat-label">of Kiwis worry about money weekly</div>
-  </div>
-  <div class="stat">
-    <div class="stat-number">80%+</div>
-    <div class="stat-label">have never received financial education</div>
-  </div>
-  <div class="stat">
-    <div class="stat-number">7 min</div>
-    <div class="stat-label">to be fully across markets</div>
-  </div>
-</div>
 
 <!-- FIVE CHANNELS -->
 <section id="channels">
@@ -738,19 +712,19 @@
     </div>
     <div class="channel-card fade-up">
       <div class="channel-name">NZ Markets</div>
-      <div class="channel-desc">The NZX session in full — stocks-first, what moved and why, and what it means if you hold them on Sharesies or in KiwiSaver.</div>
+      <div class="channel-desc">The NZX session in full — stocks-first, what moved and why, and what it means if you own them directly or hold them in KiwiSaver. ~5 minutes.</div>
     </div>
     <div class="channel-card fade-up">
       <div class="channel-name">Global Markets</div>
-      <div class="channel-desc">Wall Street, the Fed, oil, gold — told through the stocks that actually moved, not just the index. Rogue movers included.</div>
+      <div class="channel-desc">Wall Street, the Fed, oil, gold — told through the stocks that actually moved, not just the index. Rogue movers included. ~4–6 minutes.</div>
     </div>
     <div class="channel-card fade-up">
       <div class="channel-name">Trans-Tasman</div>
-      <div class="channel-desc">The ASX and RBA through a Kiwi lens — your travel money, your bank's parent company, your KiwiSaver's Australian sleeve.</div>
+      <div class="channel-desc">The ASX and RBA through a Kiwi lens — your travel money, your bank's parent company, your KiwiSaver's Australian sleeve. ~3 minutes.</div>
     </div>
     <div class="channel-card fade-up">
       <div class="channel-name">Macro &amp; RBNZ</div>
-      <div class="channel-desc">OCR decisions, inflation, Stats NZ data — and what the Reserve Bank is watching before its next move.</div>
+      <div class="channel-desc">OCR decisions, inflation, Stats NZ data — and what the Reserve Bank is watching before its next move. ~3–4 minutes.</div>
     </div>
   </div>
 </section>
@@ -766,13 +740,13 @@
   <div class="how-steps">
     <div class="step fade-up">
       <div class="step-num">1</div>
-      <div class="step-title">Primary sources</div>
-      <div class="step-body">NZX announcements, RBNZ releases, Stats NZ data, Beehive press releases — pulled directly from the source, every night.</div>
+      <div class="step-title">Official sources</div>
+      <div class="step-body">NZX and ASX announcements, RBNZ and RBA releases, Stats NZ data, Beehive releases and live market feeds — pulled directly from the source, every night.</div>
     </div>
     <div class="step fade-up">
       <div class="step-num">2</div>
-      <div class="step-title">Script written</div>
-      <div class="step-body">AI generates the script from verified primary sources. Every number confirmed. Every piece of jargon defined in plain English.</div>
+      <div class="step-title">Directed and written</div>
+      <div class="step-body">A human sets the editorial direction on our New Zealand and Trans-Tasman coverage each day — what leads, what angle matters for your wallet. The script is written from those verified sources, and every claim is checked against the source data before it's published. Every piece of jargon defined in plain English.</div>
     </div>
     <div class="step fade-up">
       <div class="step-num">3</div>
@@ -785,6 +759,8 @@
       <div class="step-body">Seven minutes later you know what moved overnight, what the RBNZ is watching, and what to track today.</div>
     </div>
   </div>
+
+  <p class="how-fineprint">AI-scripted and voiced. Global markets coverage is fully automated.</p>
 </section>
 
 <!-- PRICING -->
@@ -800,6 +776,7 @@
       <div class="pricing-badge">7-day free trial</div>
       <div class="pricing-name">Premium</div>
       <div class="pricing-amount">$19.99 <span>/ month NZD</span></div>
+      <div class="pricing-annual">Or <strong>$169.99 / year NZD</strong> — save 33%</div>
       <div class="pricing-period">After your free trial. Cancel any time.</div>
       <ul class="pricing-features">
         <li>Daily Wrap — 7 minutes, every weekday</li>
