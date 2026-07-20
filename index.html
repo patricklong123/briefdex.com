@@ -52,7 +52,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 1rem 4rem;
-    background: var(--white);
+    background: var(--bg);
     border-bottom: 1px solid var(--card-border);
   }
 
@@ -129,19 +129,19 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    background: transparent;
-    color: var(--white);
+    background: var(--gold);
+    color: var(--green);
     padding: 0.95rem 2rem;
     border-radius: 6px;
     font-weight: 500;
     font-size: 1rem;
     text-decoration: none;
-    border: 1px solid rgba(255,255,255,0.5);
+    border: none;
     cursor: pointer;
-    transition: border-color 0.2s, background 0.2s;
+    transition: background 0.2s, transform 0.15s;
     font-family: inherit;
   }
-  .btn-outline-light:hover { border-color: var(--white); background: rgba(255,255,255,0.08); }
+  .btn-outline-light:hover { background: var(--gold-hover); transform: translateY(-1px); }
 
   /* HERO */
   #home {
